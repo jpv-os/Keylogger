@@ -6,11 +6,11 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 
 
+// TODO: decouple services and events, so that instead there is completely separate handling for persistence, UI and statistics caching
 @Service
 class StatisticsService {
     val subject = Subject<StatisticsEvent>()
     private val counterService = service<CounterService>()
-
     init {
         counterService.subject.addListener { event ->
             val statisticsEvent = StatisticsEvent(
