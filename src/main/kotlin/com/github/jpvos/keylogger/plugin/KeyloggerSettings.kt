@@ -1,12 +1,12 @@
-package com.github.jpvos.keylogger.configuration
+package com.github.jpvos.keylogger.plugin
 
-import com.github.jpvos.keylogger.ui.UiContainer
+import com.github.jpvos.keylogger.ui.Container
 import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.ui.components.JBCheckBox
 import javax.swing.JComponent
 
 // TODO config implementieen
-class Configurable : SearchableConfigurable {
+class KeyloggerSettings : SearchableConfigurable {
 
     private var modified = false
     private val enabled = JBCheckBox("Enable Keylogger").apply { // TODO label
@@ -16,7 +16,7 @@ class Configurable : SearchableConfigurable {
     }
 
     private val component by lazy {
-        UiContainer().apply {
+        Container().apply {
             add(enabled)
         }
     }

@@ -4,7 +4,7 @@ import com.intellij.ui.components.JBTabbedPane
 import java.awt.event.KeyEvent
 import javax.swing.JComponent
 
-class UiTabs : UiContainer() {
+class Tabs : Container() {
 
     private val tabbedPane = JBTabbedPane()
     private var size = 0

@@ -11,20 +11,20 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable
                 parentId="tools"
-                instance="com.github.jpvos.keylogger.configuration.Configurable"
-                id="com.github.jpvos.keylogger.configuration.Configurable"
+                instance="com.github.jpvos.keylogger.plugin.KeyloggerSettings"
+                id="com.github.jpvos.keylogger.plugin.KeyloggerSettings"
                 displayName="Keylogger"/>
         <toolWindow
-                factoryClass="com.github.jpvos.keylogger.toolWindow.PluginToolWindowFactory"
+                factoryClass="com.github.jpvos.keylogger.plugin.toolwindow.KeyloggerToolWindowFactory"
                 icon="AllIcons.Actions.Lightning"
                 id="Keylogger"/>
         <editorFactoryMouseListener
-                implementation="com.github.jpvos.keylogger.listeners.MouseListener"/>
+                implementation="com.github.jpvos.keylogger.plugin.listeners.KeyloggerListener"/>
     </extensions>
 
     <applicationListeners>
         <listener
-                class="com.github.jpvos.keylogger.listeners.KeyboardListener"
+                class="com.github.jpvos.keylogger.plugin.listeners.KeyloggerListener"
                 topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
     </applicationListeners>
 </idea-plugin>

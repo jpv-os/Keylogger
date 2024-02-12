@@ -7,7 +7,7 @@ import javax.swing.ListSelectionModel
 import javax.swing.table.DefaultTableModel
 
 
-class UiTable(private val columnHeaders: Array<String>) : UiContainer() {
+class Table(private val columnHeaders: Array<String>) : Container() {
     private val tableModel = DefaultTableModel(columnHeaders, 0)
     private val table = JBTable(tableModel).apply {
         autoResizeMode = JTable.AUTO_RESIZE_ALL_COLUMNS

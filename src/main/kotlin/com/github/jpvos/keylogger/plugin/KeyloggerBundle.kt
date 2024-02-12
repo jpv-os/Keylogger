@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger
+package com.github.jpvos.keylogger.plugin
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

@@ -1,7 +1,6 @@
-package com.github.jpvos.keylogger.event
+package com.github.jpvos.keylogger.core
 
-
-data class ActionEvent(
+data class Action(
     val type: Type,
     val name: String
 ) {
