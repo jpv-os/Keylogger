@@ -52,11 +52,11 @@ class StatisticsTable : Container(), Counter.Listener, Disposable {
                 ),
                 arrayOf(
                     KeyloggerBundle.message("statistics.activeTime"),
-                    DisplayFormat.milliseconds(state.activeTime)
+                    "${DisplayFormat.milliseconds(state.activeTime)} (${DisplayFormat.percent01(state.activeTime / state.totalTime.toDouble())})"
                 ),
                 arrayOf(
                     KeyloggerBundle.message("statistics.idleTime"),
-                    DisplayFormat.milliseconds(state.idleTime)
+                    "${DisplayFormat.milliseconds(state.idleTime)} (${DisplayFormat.percent01(state.idleTime / state.totalTime.toDouble())})"
                 ),
                 arrayOf(
                     KeyloggerBundle.message("statistics.actionsPerMinute"),
