@@ -27,10 +27,12 @@ This plugin provides a simple tool window to see your actions per minute when ty
 - [ ] Minimum viable plugin
   - [ ] Persist data
   - [ ] Make things like idle timeout configurable via plugin settings
+  - [ ] Demo video
 - [ ] General improvements before continuing
   - [ ] Improve UI by implementing custom cell renderers etc. for tables
     - [ ] Follow Jetbrains UX recommendations for displaying text
   - [ ] Remove all TODOs from code and collect here if necessary
+  - [ ] CI/CD pipeline complete
 - [ ] Future feature ideas
   - [ ] Charts and visualizations
   - [ ] Status bar widget
