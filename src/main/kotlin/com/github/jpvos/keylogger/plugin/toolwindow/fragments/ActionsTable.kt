@@ -5,6 +5,7 @@ import com.github.jpvos.keylogger.core.Counter
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.github.jpvos.keylogger.plugin.services.KeyloggerService
 import com.github.jpvos.keylogger.ui.Container
+import com.github.jpvos.keylogger.ui.DisplayFormat
 import com.github.jpvos.keylogger.ui.Table
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
@@ -40,7 +41,11 @@ class ActionsTable : Container(), Counter.Listener, Disposable {
             state.actions
                 .map { it.toPair() }
                 .sortedByDescending { it.second }
-                .map { arrayOf(it.first.type, it.first.name, it.second) }
+                .map { arrayOf(
+                    DisplayFormat.text(it.first.type.toString()),
+                    DisplayFormat.text(it.first.name),
+                    DisplayFormat.long(it.second)
+                ) }
                 .toTypedArray()
         )
     }

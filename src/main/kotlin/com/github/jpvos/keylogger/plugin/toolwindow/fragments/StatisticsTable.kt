@@ -5,6 +5,7 @@ import com.github.jpvos.keylogger.core.Counter
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.github.jpvos.keylogger.plugin.services.KeyloggerService
 import com.github.jpvos.keylogger.ui.Container
+import com.github.jpvos.keylogger.ui.DisplayFormat
 import com.github.jpvos.keylogger.ui.Table
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
@@ -39,18 +40,28 @@ class StatisticsTable : Container(), Counter.Listener, Disposable {
             arrayOf(
                 arrayOf(
                     KeyloggerBundle.message("statistics.totalActions"),
-                    state.actions.toList().sumOf { it.second }),
-                arrayOf(KeyloggerBundle.message("statistics.uniqueActions"), state.actions.size),
+                    DisplayFormat.long(state.totalActions),
+                ),
+                arrayOf(
+                    KeyloggerBundle.message("statistics.uniqueActions"),
+                    DisplayFormat.long(state.uniqueActions)
+                ),
                 arrayOf(
                     KeyloggerBundle.message("statistics.totalTime"),
-                    state.activeTime + state.idleTime
+                    DisplayFormat.milliseconds(state.totalTime)
                 ),
-                arrayOf(KeyloggerBundle.message("statistics.activeTime"), state.activeTime),
-                arrayOf(KeyloggerBundle.message("statistics.idleTime"), state.idleTime),
+                arrayOf(
+                    KeyloggerBundle.message("statistics.activeTime"),
+                    DisplayFormat.milliseconds(state.activeTime)
+                ),
+                arrayOf(
+                    KeyloggerBundle.message("statistics.idleTime"),
+                    DisplayFormat.milliseconds(state.idleTime)
+                ),
                 arrayOf(
                     KeyloggerBundle.message("statistics.actionsPerMinute"),
-                    state.actions.toList().sumOf { it.second }
-                        .let { if (it == 0L) 0.0 else state.activeTime / it.toDouble() }),
+                    DisplayFormat.decimal(state.actionsPerMinute)
+                )
             )
         )
     }

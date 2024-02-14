@@ -15,7 +15,25 @@ class Counter(
         val actions: Map<Action, Long>,
         val activeTime: Long,
         val idleTime: Long
-    )
+    ) {
+        val totalTime by lazy {
+            activeTime + idleTime
+        }
+        val actionsPerMinute by lazy {
+            if (activeTime == 0L) {
+                0.0
+            } else {
+                val minutes = activeTime / 60000.0
+                totalActions / minutes
+            }
+        }
+        val uniqueActions by lazy {
+            actions.size.toLong()
+        }
+        val totalActions by lazy {
+            actions.toList().sumOf { it.second }
+        }
+    }
 
     interface Listener {
         fun onAction(action: Action)
@@ -54,7 +72,7 @@ class Counter(
         listeners.remove(listener)
     }
 
-    fun accumulateTime() {
+    private fun accumulateTime() {
         val now = System.currentTimeMillis()
         val timeSinceLastUpdate = now - lastUpdateTime
         val last = lastActionTime
