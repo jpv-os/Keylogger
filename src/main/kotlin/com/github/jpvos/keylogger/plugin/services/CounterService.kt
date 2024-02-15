@@ -11,16 +11,14 @@ import com.intellij.openapi.components.service
 @Service
 class CounterService : Counter.Listener, Disposable {
     private val databaseService = service<DatabaseService>()
-    private var _counter = Counter(idleTimeout = KeyloggerSettings.instance.idleTimeout)
-    val counter: Counter
-        get() = _counter
+    val counter = Counter(idleTimeout = KeyloggerSettings.instance.idleTimeout)
 
     init {
         restoreCounter()
     }
 
     override fun dispose() {
-        _counter.unregisterListener(this)
+        counter.unregisterListener(this)
     }
 
     override fun onAction(action: Action) {
@@ -31,9 +29,9 @@ class CounterService : Counter.Listener, Disposable {
         dispose()
         val actions = databaseService.queryActionsMap()
         val (activeTime, idleTime) = databaseService.queryActiveAndIdleTime()
-        _counter = Counter(idleTimeout = KeyloggerSettings.instance.idleTimeout)
-        _counter.setState(Counter.State(actions, activeTime, idleTime))
-        _counter.registerListener(this)
+        counter.setIdleTimeout(KeyloggerSettings.instance.idleTimeout)
+        counter.setState(Counter.State(actions, activeTime, idleTime))
+        counter.registerListener(this)
     }
 
 }

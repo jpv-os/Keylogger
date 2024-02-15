@@ -18,19 +18,15 @@ class DatabaseService : Disposable {
         db.close()
     }
 
+    fun clearDatabase() {
+        verifyDatabaseConnection()
+        db.statement("DELETE FROM actions")
+    }
+
     fun restoreDatabase() {
         dispose()
         db.connect(KeyloggerSettings.instance.databaseURL)
-        db.statement("CREATE TABLE IF NOT EXISTS meta (key TEXT NOT NULL UNIQUE, value TEXT)")
-        val pluginVersion = db.query("SELECT value FROM meta WHERE key = 'plugin_version'") {
-            if (next()) getString("value") else null
-        }
-        // in the future, use this plugin version number to implement database migrations
-        // for now, just create the tables if they don't exist
-        if (pluginVersion == null) {
-            db.statement("INSERT INTO meta (key, value) VALUES ('plugin_version', '1')")
-            db.statement("CREATE TABLE IF NOT EXISTS actions (type TEXT NOT NULL, name TEXT NOT NULL, timestamp LONG NOT NULL)")
-        }
+        db.statement("CREATE TABLE IF NOT EXISTS actions (type TEXT NOT NULL, name TEXT NOT NULL, timestamp LONG NOT NULL)")
     }
 
     fun queryActionsMap(): Map<Action, Long> {

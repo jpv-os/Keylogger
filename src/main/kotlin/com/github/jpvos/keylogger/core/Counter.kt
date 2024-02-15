@@ -38,6 +38,8 @@ class Counter(
         fun onAction(action: Action)
     }
 
+    private val listeners = mutableListOf<Listener>()
+
     fun setState(state: State) {
         actions.clear()
         actions.putAll(state.actions)
@@ -60,7 +62,9 @@ class Counter(
         listeners.forEach { it.onAction(action) }
     }
 
-    private val listeners = mutableListOf<Listener>()
+    fun setIdleTimeout(idleTimeout: Long) {
+        this.idleTimeout = idleTimeout
+    }
 
     fun registerListener(listener: Listener) {
         listeners.add(listener)

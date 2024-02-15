@@ -1,5 +1,6 @@
 package com.github.jpvos.keylogger.db
 
+import java.io.File
 import java.sql.*
 
 class SqliteDatabaseConnection {
@@ -17,6 +18,10 @@ class SqliteDatabaseConnection {
             throw Error("Error while loading JDBC driver", e)
         }
         try {
+            val file = File(url)
+            if (!file.exists()) {
+                file.parentFile.mkdirs()
+            }
             connection = DriverManager.getConnection("jdbc:sqlite:file:${url}")
         } catch (e: SQLException) {
             throw Error("Error while establishing connection to database", e)

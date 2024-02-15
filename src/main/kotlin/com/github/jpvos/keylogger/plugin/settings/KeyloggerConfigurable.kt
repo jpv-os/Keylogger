@@ -12,7 +12,21 @@ class KeyloggerConfigurable : SearchableConfigurable {
 
     private val databaseService = service<DatabaseService>()
     private val counterService = service<CounterService>()
-    private var settingsComponent: KeyloggerSettingsComponent = KeyloggerSettingsComponent()
+    private var settingsComponent: KeyloggerSettingsComponent = KeyloggerSettingsComponent(
+        restoreDefaultsCallback = {
+            restoreDefaults()
+        },
+        clearDatabaseCallback = {
+            databaseService.clearDatabase()
+            counterService.restoreCounter()
+        }
+    )
+
+    private fun restoreDefaults() {
+        settingsComponent.databaseURL = KeyloggerSettings.defaultDatabaseURL
+        settingsComponent.idleTimeout = KeyloggerSettings.defaultIdleTimeout
+        apply()
+    }
 
     override fun createComponent(): JComponent {
         return settingsComponent.panel

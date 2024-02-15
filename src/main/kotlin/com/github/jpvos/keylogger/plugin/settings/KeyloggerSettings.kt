@@ -14,16 +14,18 @@ import kotlin.io.path.Path
     storages = [Storage("Keylogger.xml")]
 )
 internal class KeyloggerSettings : PersistentStateComponent<KeyloggerSettings> {
-    var databaseURL = Path(
-        System.getProperty("user.home"),
-        KeyloggerBundle.message("settings.form.databaseURL.defaultValue")
-    ).toString()
-    var idleTimeout = KeyloggerBundle.message("settings.form.idleTimeout.defaultValue").toLong()
-
     companion object {
         val instance: KeyloggerSettings
             get() = ApplicationManager.getApplication().getService(KeyloggerSettings::class.java)
+        val defaultDatabaseURL = Path(
+            System.getProperty("user.home"),
+            *KeyloggerBundle.message("settings.form.databaseURL.defaultValue").split("/").toTypedArray()
+        ).toString()
+        val defaultIdleTimeout = KeyloggerBundle.message("settings.form.idleTimeout.defaultValue").toLong()
     }
+
+    var databaseURL = defaultDatabaseURL
+    var idleTimeout = defaultIdleTimeout
 
     override fun getState(): KeyloggerSettings {
         return this

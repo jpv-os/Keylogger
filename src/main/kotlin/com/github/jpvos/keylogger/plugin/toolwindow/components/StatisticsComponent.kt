@@ -59,7 +59,6 @@ class StatisticsComponent : Container(), Counter.Listener, Disposable {
                     KeyloggerBundle.message("statistics.idleTime"),
                     DisplayFormat.duration(state.idleTime)
                 ),
-
                 arrayOf(
                     KeyloggerBundle.message("statistics.idleTimeout"),
                     DisplayFormat.milliseconds(KeyloggerSettings.instance.idleTimeout)
