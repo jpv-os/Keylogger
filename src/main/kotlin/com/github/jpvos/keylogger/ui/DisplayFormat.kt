@@ -17,7 +17,7 @@ object DisplayFormat {
 
     fun percent(value: Double): String {
         require(value in 0.0..100.0)
-        return "${decimal(value)}%"
+        return "${"%.4f".format(value)}%"
     }
 
     fun percent01(value: Double): String {

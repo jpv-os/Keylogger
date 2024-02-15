@@ -29,11 +29,22 @@ class DatabaseConnection(url: String) {
         }
     }
 
-    fun <T> statement(body: Statement.() -> T): T {
+    fun <T> query(sql: String, body: ResultSet.() -> T): T {
         try {
             val statement = connection.createStatement()
             statement.queryTimeout = defaultQueryTimeout
-            return statement.body()
+            val resultSet = statement.executeQuery(sql)
+            return resultSet.body()
+        } catch (e: SQLException) {
+            throw Error("Error while executing query", e)
+        }
+    }
+
+    fun statement(sql: String) {
+        try {
+            val statement = connection.createStatement()
+            statement.queryTimeout = defaultQueryTimeout
+            statement.execute(sql)
         } catch (e: SQLException) {
             throw Error("Error while executing statement", e)
         }
@@ -44,6 +55,7 @@ class DatabaseConnection(url: String) {
             val preparedStatement = connection.prepareStatement(sql)
             preparedStatement.queryTimeout = defaultQueryTimeout
             preparedStatement.body()
+            preparedStatement.execute()
         } catch (e: SQLException) {
             throw Error("Error while executing prepared statement", e)
         }

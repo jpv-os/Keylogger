@@ -18,6 +18,7 @@ class ActionsTable : Container(), Counter.Listener, Disposable {
             KeyloggerBundle.message("actions.table.type"),
             KeyloggerBundle.message("actions.table.name"),
             KeyloggerBundle.message("actions.table.count"),
+            KeyloggerBundle.message("actions.table.share"),
         )
     )
 
@@ -44,7 +45,8 @@ class ActionsTable : Container(), Counter.Listener, Disposable {
                 .map { arrayOf(
                     DisplayFormat.text(it.first.type.toString()),
                     DisplayFormat.text(it.first.name),
-                    DisplayFormat.long(it.second)
+                    DisplayFormat.long(it.second),
+                    DisplayFormat.percent01(it.second.toDouble() / state.totalActions.toDouble())
                 ) }
                 .toTypedArray()
         )
