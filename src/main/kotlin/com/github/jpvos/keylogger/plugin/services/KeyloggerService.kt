@@ -2,59 +2,86 @@ package com.github.jpvos.keylogger.plugin.services
 
 import com.github.jpvos.keylogger.core.Action
 import com.github.jpvos.keylogger.core.Counter
+import com.github.jpvos.keylogger.db.DatabaseConnection
+import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
-import java.sql.*
 
 
 @Service
-class KeyloggerService : Counter.Listener {
+class KeyloggerService : Counter.Listener, Disposable { // TODO: disposable is not correct for service?
     val counter = Counter()
+    private val db = DatabaseConnection("jdbc:sqlite:file:/tmp/keylogger.db") // TODO: configurable
+//    private val db = DatabaseConnection("jdbc:sqlite:keylogger.db")
 
     init {
-        // TODO: read from storage
+        initializeDatabase()
+        loadInitialState()
+        counter.registerListener(this)
+    }
+
+    private fun loadInitialState() {
+        val actions = db.statement {
+            val resultSet = executeQuery("SELECT type, name, count(*) as count FROM actions GROUP BY type, name")
+            val result = mutableMapOf<Action, Long>()
+            while (resultSet.next()) {
+                val type = resultSet.getString("type").let {
+                    when (it) {
+                        "EditorAction" -> Action.Type.EditorAction
+                        "Keystroke" -> Action.Type.Keystroke
+                        "Mouse" -> Action.Type.Mouse
+                        else -> throw Error("Could not read action type: $it")
+                    }
+                }
+                val name = resultSet.getString("name")
+                val count = resultSet.getLong("count")
+                val action = Action(type, name)
+                result[action] = count
+            }
+            return@statement result
+        }
+
         val initialState = Counter.State(
-            activeTime = 0,
-            idleTime = 0,
-            actions = emptyMap()
+            activeTime = 0, // TODO
+            idleTime = 0,   // TODO
+            actions = actions
         )
         counter.setState(initialState)
+    }
 
-
-        Class.forName("org.sqlite.JDBC")
-        var connection: Connection? = null
-        try {
-            // create a database connection
-            connection = DriverManager.getConnection("jdbc:sqlite:main.db")
-            val statement: Statement = connection.createStatement()
-            statement.setQueryTimeout(30) // set timeout to 30 sec.
-
-            statement.executeUpdate("drop table if exists person")
-            statement.executeUpdate("create table person (id integer, name string)")
-            statement.executeUpdate("insert into person values(1, 'leo')")
-            statement.executeUpdate("insert into person values(2, 'yui')")
-            val rs: ResultSet = statement.executeQuery("select * from person")
-            while (rs.next()) {
-                // read the result set
-                thisLogger().warn("name = " + rs.getString("name"))
-                thisLogger().warn("id = " + rs.getInt("id"))
-            }
-        } catch (e: SQLException) {
-            // if the error message is "out of memory",
-            // it probably means no database file is found
-            System.err.thisLogger().warn(e.message)
-        } finally {
-            try {
-                if (connection != null) connection.close()
-            } catch (e: SQLException) {
-                // connection close failed.
-                System.err.thisLogger().warn(e.message)
-            }
-        }
+    override fun dispose() {
+        counter.unregisterListener(this)
+        db.close()
     }
 
     override fun onAction(action: Action) {
-        // TODO: save action/state to storage
+        db.preparedStatement("INSERT INTO actions (type, name, timestamp) VALUES (?, ?, ?)") {
+            setString(1, action.type.name)
+            setString(2, action.name)
+            setLong(3, System.currentTimeMillis())
+            execute()
+        }
+        // TODO doesnt work?
     }
 
+    private fun initializeDatabase() {
+        thisLogger().warn("Initializing Keylogger database")
+        db.statement {
+            execute("CREATE TABLE IF NOT EXISTS meta (key TEXT NOT NULL UNIQUE, value TEXT)")
+        }
+        val pluginVersion = db.statement {
+            val resultSet = executeQuery("SELECT value FROM meta WHERE key = 'plugin_version'")
+            return@statement if (resultSet.next()) resultSet.getString("value") else null
+        }
+        pluginVersion?.let {
+            thisLogger().warn("Plugin database version $it detected")
+        } ?: run {
+            thisLogger().warn("No plugin database version found, create tables")
+            db.statement {
+                execute("INSERT INTO meta (key, value) VALUES ('plugin_version', '1')")
+                execute("CREATE TABLE IF NOT EXISTS actions (type TEXT NOT NULL, name TEXT NOT NULL, timestamp LONG NOT NULL)")
+            }
+        }
+        thisLogger().warn("Keylogger database initialized")
+    }
 }

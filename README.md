@@ -33,6 +33,7 @@ This plugin provides a simple tool window to see your actions per minute when ty
     - [ ] Follow Jetbrains UX recommendations for displaying text
   - [ ] Remove all TODOs from code and collect here if necessary
   - [ ] CI/CD pipeline complete
+  - [ ] Logging
 - [ ] Future feature ideas
   - [ ] Charts and visualizations
   - [ ] Status bar widget

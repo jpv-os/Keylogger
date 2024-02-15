@@ -46,19 +46,18 @@ class Counter(
         idleTime = state.idleTime
         lastActionTime = null
         lastUpdateTime = System.currentTimeMillis()
-        accumulateTime()
     }
 
     fun getState(): State {
-        accumulateTime()
+        accumulateTime() // TODO: wird zu oft gecalled?
         return State(actions, activeTime, idleTime)
     }
 
     fun next(action: Action) {
-        accumulateTime()
+        accumulateTime() // TODO: wird zu oft gecalled?
         lastActionTime = System.currentTimeMillis()
         actions[action] = (actions[action] ?: 0L) + 1L
-        accumulateTime()
+        accumulateTime() // TODO: wird zu oft gecalled?
         listeners.forEach { it.onAction(action) }
     }
 
