@@ -9,3 +9,6 @@
 - Simple tool window to display actions per minute
 - Setup README and CHANGELOG
 - Generate JetBrains marketplace plugin ID with initial hidden release
+- Store data in SQLite database
+- Make database URL and idle timeout configurable via plugin settings
+- Add a simple settings page to configure database URL and idle timeout

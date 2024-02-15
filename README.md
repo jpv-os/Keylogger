@@ -25,9 +25,8 @@ This plugin provides a simple tool window to see your actions per minute when ty
   - [x] Create a simple tool window
   - [x] First (hidden) release
 - [ ] Minimum viable plugin
-  - [ ] Persist data
-  - [ ] Make things like idle timeout configurable via plugin settings
-  - [ ] Demo video
+  - [x] Persist data
+  - [x] Make things like idle timeout configurable via plugin settings
 - [ ] General improvements before continuing
   - [ ] Improve UI by implementing custom cell renderers etc. for tables
     - [ ] Follow Jetbrains UX recommendations for displaying text
@@ -35,9 +34,11 @@ This plugin provides a simple tool window to see your actions per minute when ty
   - [ ] CI/CD pipeline complete
   - [ ] Logging
 - [ ] Future feature ideas
+  - [ ] Store entire SQLite database in plugin settings, so that it works with settings sync (allowed maximum size?)
   - [ ] Charts and visualizations
   - [ ] Status bar widget
   - [ ] Data export
+  - [ ] Demo video (must be hosted on YouTube)
 
 ## Development
 

@@ -11,8 +11,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable
                 parentId="tools"
-                instance="com.github.jpvos.keylogger.plugin.KeyloggerSettings"
-                id="com.github.jpvos.keylogger.plugin.KeyloggerSettings"
+                instance="com.github.jpvos.keylogger.plugin.settings.KeyloggerConfigurable"
+                id="com.github.jpvos.keylogger.plugin.settings.KeyloggerConfigurable"
                 displayName="Keylogger"/>
         <toolWindow
                 factoryClass="com.github.jpvos.keylogger.plugin.toolwindow.KeyloggerToolWindowFactory"
@@ -20,6 +20,8 @@
                 id="Keylogger"/>
         <editorFactoryMouseListener
                 implementation="com.github.jpvos.keylogger.plugin.listeners.KeyloggerListener"/>
+        <applicationService
+                serviceImplementation="com.github.jpvos.keylogger.plugin.settings.KeyloggerSettings"/>
     </extensions>
 
     <applicationListeners>

@@ -1,7 +1,6 @@
 package com.github.jpvos.keylogger.core
 
 
-
 class Counter(
     private var idleTimeout: Long = 1000L,
     private var actions: MutableMap<Action, Long> = mutableMapOf(),
@@ -11,7 +10,7 @@ class Counter(
     private var lastUpdateTime: Long = System.currentTimeMillis(),
 ) {
 
-    data class State (
+    data class State(
         val actions: Map<Action, Long>,
         val activeTime: Long,
         val idleTime: Long
@@ -49,15 +48,15 @@ class Counter(
     }
 
     fun getState(): State {
-        accumulateTime() // TODO: wird zu oft gecalled?
+        accumulateTime()
         return State(actions, activeTime, idleTime)
     }
 
     fun next(action: Action) {
-        accumulateTime() // TODO: wird zu oft gecalled?
+        accumulateTime()
         lastActionTime = System.currentTimeMillis()
         actions[action] = (actions[action] ?: 0L) + 1L
-        accumulateTime() // TODO: wird zu oft gecalled?
+        accumulateTime()
         listeners.forEach { it.onAction(action) }
     }
 

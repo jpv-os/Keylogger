@@ -2,36 +2,30 @@ package com.github.jpvos.keylogger.db
 
 import java.sql.*
 
-class DatabaseConnection(url: String) {
+class SqliteDatabaseConnection {
 
     private val defaultQueryTimeout = 30
-    private lateinit var connection: Connection
+    private var connection: Connection? = null
 
-    init {
-        connect(url)
-    }
+    val open: Boolean
+        get() = !(connection?.isClosed ?: true)
 
-    private fun connect(url: String) {
+    fun connect(url: String) {
         try {
-            // the following line will force-load the org.sqlite.JDBC driver
-            // without it, the driver will not be found when running the JAR
-            // see https://stackoverflow.com/questions/6740601/what-does-class-fornameorg-sqlite-jdbc-do
             Class.forName("org.sqlite.JDBC")
-            // now that the driver is loaded, we can establish a connection
-        } catch (e: Exception) {
+        } catch (e: ClassNotFoundException) {
             throw Error("Error while loading JDBC driver", e)
         }
         try {
-            connection = DriverManager.getConnection(url)
+            connection = DriverManager.getConnection("jdbc:sqlite:file:${url}")
         } catch (e: SQLException) {
-            // TODO: catch "out of memory" error if DB does not exist
             throw Error("Error while establishing connection to database", e)
         }
     }
 
     fun <T> query(sql: String, body: ResultSet.() -> T): T {
         try {
-            val statement = connection.createStatement()
+            val statement = getConnection().createStatement()
             statement.queryTimeout = defaultQueryTimeout
             val resultSet = statement.executeQuery(sql)
             return resultSet.body()
@@ -42,7 +36,7 @@ class DatabaseConnection(url: String) {
 
     fun statement(sql: String) {
         try {
-            val statement = connection.createStatement()
+            val statement = getConnection().createStatement()
             statement.queryTimeout = defaultQueryTimeout
             statement.execute(sql)
         } catch (e: SQLException) {
@@ -52,7 +46,7 @@ class DatabaseConnection(url: String) {
 
     fun preparedStatement(sql: String, body: PreparedStatement.() -> Unit) {
         try {
-            val preparedStatement = connection.prepareStatement(sql)
+            val preparedStatement = getConnection().prepareStatement(sql)
             preparedStatement.queryTimeout = defaultQueryTimeout
             preparedStatement.body()
             preparedStatement.execute()
@@ -63,11 +57,18 @@ class DatabaseConnection(url: String) {
 
 
     fun close() {
+        val con = connection
+        if (con == null || con.isClosed)
+            return
         try {
-            connection.close()
+            con.close()
         } catch (e: SQLException) {
             throw Error("Error while closing connection to database", e)
         }
+    }
+
+    private fun getConnection(): Connection {
+        return connection ?: throw Error("No connection to database")
     }
 
 }

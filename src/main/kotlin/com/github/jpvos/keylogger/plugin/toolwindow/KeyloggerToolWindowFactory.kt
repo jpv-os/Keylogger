@@ -1,8 +1,8 @@
 package com.github.jpvos.keylogger.plugin.toolwindow
 
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
-import com.github.jpvos.keylogger.plugin.toolwindow.fragments.ActionsTable
-import com.github.jpvos.keylogger.plugin.toolwindow.fragments.StatisticsTable
+import com.github.jpvos.keylogger.plugin.toolwindow.components.ActionsComponent
+import com.github.jpvos.keylogger.plugin.toolwindow.components.StatisticsComponent
 import com.github.jpvos.keylogger.ui.Container
 import com.github.jpvos.keylogger.ui.Tabs
 import com.intellij.openapi.project.Project
@@ -18,11 +18,11 @@ class KeyloggerToolWindowFactory : ToolWindowFactory {
             add(Tabs().apply {
                 addTab(
                     KeyloggerBundle.message("toolwindow.statistics"),
-                    StatisticsTable()
+                    StatisticsComponent()
                 )
                 addTab(
                     KeyloggerBundle.message("toolwindow.actions"),
-                    ActionsTable()
+                    ActionsComponent()
                 )
             })
         }

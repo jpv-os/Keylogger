@@ -1,18 +1,18 @@
-package com.github.jpvos.keylogger.plugin.toolwindow.fragments
+package com.github.jpvos.keylogger.plugin.toolwindow.components
 
 import com.github.jpvos.keylogger.core.Action
 import com.github.jpvos.keylogger.core.Counter
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
-import com.github.jpvos.keylogger.plugin.services.KeyloggerService
+import com.github.jpvos.keylogger.plugin.services.CounterService
 import com.github.jpvos.keylogger.ui.Container
 import com.github.jpvos.keylogger.ui.DisplayFormat
 import com.github.jpvos.keylogger.ui.Table
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 
-class ActionsTable : Container(), Counter.Listener, Disposable {
+class ActionsComponent : Container(), Counter.Listener, Disposable {
 
-    private val keyloggerService = service<KeyloggerService>()
+    private val counterService = service<CounterService>()
     private val table = Table(
         arrayOf(
             KeyloggerBundle.message("actions.table.type"),
@@ -25,7 +25,7 @@ class ActionsTable : Container(), Counter.Listener, Disposable {
     init {
         add(table)
         updateTableData()
-        keyloggerService.counter.registerListener(this)
+        counterService.counter.registerListener(this)
     }
 
     override fun onAction(action: Action) {
@@ -33,21 +33,23 @@ class ActionsTable : Container(), Counter.Listener, Disposable {
     }
 
     override fun dispose() {
-        keyloggerService.counter.unregisterListener(this)
+        counterService.counter.unregisterListener(this)
     }
 
     private fun updateTableData() {
-        val state = keyloggerService.counter.getState()
+        val state = counterService.counter.getState()
         table.setTableData(
             state.actions
                 .map { it.toPair() }
                 .sortedByDescending { it.second }
-                .map { arrayOf(
-                    DisplayFormat.text(it.first.type.toString()),
-                    DisplayFormat.text(it.first.name),
-                    DisplayFormat.long(it.second),
-                    DisplayFormat.percent01(it.second.toDouble() / state.totalActions.toDouble())
-                ) }
+                .map {
+                    arrayOf(
+                        DisplayFormat.text(it.first.type.toString()),
+                        DisplayFormat.text(it.first.name),
+                        DisplayFormat.long(it.second),
+                        DisplayFormat.percent01(it.second.toDouble() / state.totalActions.toDouble())
+                    )
+                }
                 .toTypedArray()
         )
     }
