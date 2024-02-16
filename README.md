@@ -9,6 +9,17 @@ This plugin provides a simple tool window to see your actions per minute when ty
 in the editor.
 <!-- Plugin description end -->
 
+## Features
+
+- Listens for actions in the editor (typing, clicking, shortcuts)
+- Stores the actions in a local SQLite database file (can be customized)
+- Shows a simple tool window with a table of the actions and some statistics
+    - active time, idle time
+    - actions per minute, unique actions, ...
+- Configurable idle timeout
+
+![Screenshot 1](assets/screenshot1.png)
+
 ## Roadmap
 
 - [ ] Start with template project
@@ -22,10 +33,10 @@ in the editor.
     - [x] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate)
       for the first time.
     - [x] Set the `PLUGIN_ID` in the above README badges.
-    - [ ] Set
+    - [x] Set
       the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate)
       related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-    - [ ] Set
+    - [x] Set
       the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
     - [x] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be
       notified about releases containing new features and fixes.
@@ -36,12 +47,11 @@ in the editor.
 - [ ] Minimum viable plugin
     - [x] Persist data
     - [x] Make things like idle timeout configurable via plugin settings
+    - [x] CI/CD pipeline complete
 - [ ] General improvements before continuing
     - [ ] Improve UI by implementing custom cell renderers etc. for tables
-        - [ ] Follow Jetbrains UX recommendations for displaying text
-    - [ ] Restore default settings button, delete database button in settings page
+    - [x] Restore default settings button, delete database button in settings page
     - [ ] Write tests
-    - [ ] CI/CD pipeline complete
     - [ ] Logging
 - [ ] Future feature ideas
     - [ ] Store entire SQLite database in plugin settings, so that it works with settings sync (allowed maximum size?)
