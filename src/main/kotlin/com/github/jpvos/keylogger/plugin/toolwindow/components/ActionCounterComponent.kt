@@ -10,15 +10,15 @@ import com.github.jpvos.keylogger.ui.Table
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 
-class ActionsComponent : Container(), Counter.Listener, Disposable {
+class ActionCounterComponent : Container(), Counter.Listener, Disposable {
 
     private val counterService = service<CounterService>()
     private val table = Table(
         arrayOf(
-            KeyloggerBundle.message("actions.table.type"),
-            KeyloggerBundle.message("actions.table.name"),
-            KeyloggerBundle.message("actions.table.count"),
-            KeyloggerBundle.message("actions.table.share"),
+            KeyloggerBundle.message("actionCounter.table.type"),
+            KeyloggerBundle.message("actionCounter.table.name"),
+            KeyloggerBundle.message("actionCounter.table.count"),
+            KeyloggerBundle.message("actionCounter.table.share"),
         )
     )
 

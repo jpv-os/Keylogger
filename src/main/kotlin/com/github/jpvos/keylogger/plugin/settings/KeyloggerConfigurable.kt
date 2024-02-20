@@ -25,6 +25,8 @@ class KeyloggerConfigurable : SearchableConfigurable {
     private fun restoreDefaults() {
         settingsComponent.databaseURL = KeyloggerSettings.defaultDatabaseURL
         settingsComponent.idleTimeout = KeyloggerSettings.defaultIdleTimeout
+        settingsComponent.historySize = KeyloggerSettings.defaultHistorySize
+        settingsComponent.ideaVim = KeyloggerSettings.defaultIdeaVim
         apply()
     }
 
@@ -36,13 +38,17 @@ class KeyloggerConfigurable : SearchableConfigurable {
         val settings = KeyloggerSettings.instance
         val databaseUrlModified = settingsComponent.databaseURL != settings.databaseURL
         val idleTimeoutModified = settingsComponent.idleTimeout != settings.idleTimeout
-        return databaseUrlModified or idleTimeoutModified
+        val historySizeModified = settingsComponent.historySize != settings.historySize
+        val ideaVimModified = settingsComponent.ideaVim != settings.ideaVim
+        return databaseUrlModified or idleTimeoutModified or historySizeModified or ideaVimModified
     }
 
     override fun apply() {
         val settings = KeyloggerSettings.instance
         settings.databaseURL = settingsComponent.databaseURL ?: ""
         settings.idleTimeout = settingsComponent.idleTimeout
+        settings.historySize = settingsComponent.historySize
+        settings.ideaVim = settingsComponent.ideaVim
         databaseService.restoreDatabase()
         counterService.restoreCounter()
     }
@@ -51,6 +57,8 @@ class KeyloggerConfigurable : SearchableConfigurable {
         val settings = KeyloggerSettings.instance
         settingsComponent.databaseURL = settings.databaseURL
         settingsComponent.idleTimeout = settings.idleTimeout
+        settingsComponent.historySize = settings.historySize
+        settingsComponent.ideaVim = settings.ideaVim
     }
 
     override fun getDisplayName(): String {

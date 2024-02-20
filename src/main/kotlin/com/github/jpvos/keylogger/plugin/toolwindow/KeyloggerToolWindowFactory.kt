@@ -1,30 +1,25 @@
 package com.github.jpvos.keylogger.plugin.toolwindow
 
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
-import com.github.jpvos.keylogger.plugin.toolwindow.components.ActionsComponent
-import com.github.jpvos.keylogger.plugin.toolwindow.components.StatisticsComponent
+import com.github.jpvos.keylogger.plugin.toolwindow.components.ActionCounterComponent
+import com.github.jpvos.keylogger.plugin.toolwindow.components.HistoryComponent
+import com.github.jpvos.keylogger.plugin.toolwindow.components.OverviewComponent
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.content.ContentFactory
-
+import javax.swing.JComponent
 
 class KeyloggerToolWindowFactory : ToolWindowFactory {
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val factory = ContentFactory.getInstance()
-        val statisticsTab = factory.createContent(
-            StatisticsComponent(),
-            KeyloggerBundle.message("toolwindow.statistics"),
-            false
-        )
-        val actionsTab = factory.createContent(
-            ActionsComponent(),
-            KeyloggerBundle.message("toolwindow.actions"),
-            false
-        )
-        toolWindow.contentManager.addContent(statisticsTab)
-        toolWindow.contentManager.addContent(actionsTab)
+        fun addTab(title: String, component: JComponent?) {
+            val tab = ContentFactory.getInstance().createContent(component, title, false)
+            toolWindow.contentManager.addContent(tab)
+        }
+        addTab(KeyloggerBundle.message("toolWindow.overview"), OverviewComponent())
+        addTab(KeyloggerBundle.message("toolWindow.actionCounter"), ActionCounterComponent())
+        addTab(KeyloggerBundle.message("toolWindow.history"), HistoryComponent())
     }
 
     override fun shouldBeAvailable(project: Project) = true

@@ -27,6 +27,9 @@
     <applicationListeners>
         <listener
                 class="com.github.jpvos.keylogger.plugin.listeners.KeyloggerListener"
+                topic="com.intellij.openapi.application.ApplicationActivationListener"/>
+        <listener
+                class="com.github.jpvos.keylogger.plugin.listeners.KeyloggerListener"
                 topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
     </applicationListeners>
 </idea-plugin>

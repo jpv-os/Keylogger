@@ -72,8 +72,9 @@ This plugin is still in its early stages. The following roadmap is a rough outli
     - [x] Persist data
     - [x] Make things like idle timeout configurable via plugin settings
 - [ ] General improvements 
+    - [x] History of actions
     - [x] Restore default settings button, delete database button in settings page
-    - [ ] Listen to "Editor Active" events to make sure the idle timeout is accurate and only one session is recorded
+    - [ ] Make sure only one instance of the action counter is running (problem with multiple IDE windows open)
     - [ ] Improve UI by implementing custom cell renderers etc. for tables
     - [ ] Database schema validation on startup
 - [ ] Code Quality
@@ -83,9 +84,9 @@ This plugin is still in its early stages. The following roadmap is a rough outli
     - [ ] Dependabot version bumps
     - [ ] Host code reports on GitHub Pages
 - [ ] Future feature ideas
-    - [ ] Welcome Dialog
-    - [ ] Notifications (e.g. "Database successfully deleted")
-    - [ ] History of actions
+    - [ ] Welcome Dialog / First Run Wizard
+    - [ ] Notifications (e.g. "Database successfully deleted", "1 million actions reached" etc.)
+    - [ ] Configurable Action ignore list
     - [ ] Store actions database in plugin settings, so that it works with settings sync (allowed maximum size?)
     - [ ] Charts and visualizations in tool window
     - [ ] IDE status bar widget that shows the current APM (or other statistics)

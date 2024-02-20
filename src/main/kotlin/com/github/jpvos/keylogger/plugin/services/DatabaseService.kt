@@ -5,6 +5,7 @@ import com.github.jpvos.keylogger.db.SqliteDatabaseConnection
 import com.github.jpvos.keylogger.plugin.settings.KeyloggerSettings
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.Service
+import com.intellij.openapi.diagnostic.thisLogger
 
 @Service
 class DatabaseService : Disposable {
@@ -18,15 +19,32 @@ class DatabaseService : Disposable {
         db.close()
     }
 
+    fun restoreDatabase() {
+        dispose()
+        db.connect(KeyloggerSettings.instance.databaseURL)
+        db.statement("CREATE TABLE IF NOT EXISTS actions (type TEXT NOT NULL, name TEXT NOT NULL, timestamp LONG NOT NULL)")
+    }
+
     fun clearDatabase() {
         verifyDatabaseConnection()
         db.statement("DELETE FROM actions")
     }
 
-    fun restoreDatabase() {
-        dispose()
-        db.connect(KeyloggerSettings.instance.databaseURL)
-        db.statement("CREATE TABLE IF NOT EXISTS actions (type TEXT NOT NULL, name TEXT NOT NULL, timestamp LONG NOT NULL)")
+    fun queryActionsHistory(size: Long): List<Pair<Action, Long>> {
+        verifyDatabaseConnection()
+        return db.preparedQuery(
+            "SELECT type, name, timestamp FROM actions ORDER BY timestamp DESC LIMIT ?",
+            { setLong(1, size) }
+        ) {
+            val result = mutableListOf<Pair<Action, Long>>()
+            while (next()) {
+                val type = parseActionType(getString("type"))
+                val name = getString("name")
+                val timestamp = getLong("timestamp")
+                result.add(Action(type, name) to timestamp)
+            }
+            return@preparedQuery result
+        }
     }
 
     fun queryActionsMap(): Map<Action, Long> {
@@ -34,14 +52,7 @@ class DatabaseService : Disposable {
         return db.query("SELECT type, name, count(*) as count FROM actions GROUP BY type, name") {
             val result = mutableMapOf<Action, Long>()
             while (next()) {
-                val type = getString("type").let {
-                    when (it) {
-                        "EditorAction" -> Action.Type.EditorAction
-                        "Keystroke" -> Action.Type.Keystroke
-                        "Mouse" -> Action.Type.Mouse
-                        else -> throw Error("Could not read action type: $it")
-                    }
-                }
+                val type = parseActionType(getString("type"))
                 val name = getString("name")
                 val count = getLong("count")
                 result[Action(type, name)] = count
@@ -75,6 +86,7 @@ class DatabaseService : Disposable {
     }
 
     fun persistAction(action: Action) {
+        thisLogger().warn("Persisting action: $action")
         verifyDatabaseConnection()
         db.preparedStatement("INSERT INTO actions (type, name, timestamp) VALUES (?, ?, ?)") {
             setString(1, action.type.name)
@@ -88,4 +100,10 @@ class DatabaseService : Disposable {
         if (!db.open) throw Error("Database is not open, initialize database first")
     }
 
+    private fun parseActionType(it: String?) = when (it) {
+        "EditorAction" -> Action.Type.EditorAction
+        "Keystroke" -> Action.Type.Keystroke
+        "Mouse" -> Action.Type.Mouse
+        else -> throw Error("Could not read action type: $it")
+    }
 }

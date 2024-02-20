@@ -39,6 +39,22 @@ class SqliteDatabaseConnection {
         }
     }
 
+    fun <T> preparedQuery(
+        sql: String,
+        statementBody: PreparedStatement.() -> Unit,
+        resultBody: ResultSet.() -> T
+    ): T {
+        try {
+            val statement = getConnection().prepareStatement(sql)
+            statement.queryTimeout = defaultQueryTimeout
+            statement.statementBody()
+            val resultSet = statement.executeQuery()
+            return resultSet.resultBody()
+        } catch (e: SQLException) {
+            throw Error("Error while executing query", e)
+        }
+    }
+
     fun statement(sql: String) {
         try {
             val statement = getConnection().createStatement()

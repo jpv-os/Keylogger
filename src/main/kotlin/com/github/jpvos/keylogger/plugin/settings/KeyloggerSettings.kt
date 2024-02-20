@@ -22,10 +22,32 @@ internal class KeyloggerSettings : PersistentStateComponent<KeyloggerSettings> {
             *KeyloggerBundle.message("settings.form.databaseURL.defaultValue").split("/").toTypedArray()
         ).toString()
         val defaultIdleTimeout = KeyloggerBundle.message("settings.form.idleTimeout.defaultValue").toLong()
+        val defaultHistorySize = KeyloggerBundle.message("settings.form.historySize.defaultValue").toLong()
+        val defaultIdeaVim = KeyloggerBundle.message("settings.form.ideaVim.defaultValue").toBoolean()
     }
 
+    /**
+     * The URL of the database file.
+     */
     var databaseURL = defaultDatabaseURL
+
+    /**
+     * The time in milliseconds after which the user is considered idle.
+     */
     var idleTimeout = defaultIdleTimeout
+
+    /**
+     * The maximum number of actions to display in the history tab.
+     * Note that this is not the maximum number of actions to store in the database.
+     */
+    var historySize = defaultHistorySize
+
+    /**
+     * Compatibility mode for the IdeaVim plugin.
+     * When using IdeaVim in insert mode, the backspace key triggers both the "Backspace" and "Shortcuts" actions.
+     * To avoid counting the same action twice, we ignore the "Shortcuts" action.
+     */
+    var ideaVim = defaultIdeaVim
 
     override fun getState(): KeyloggerSettings {
         return this
