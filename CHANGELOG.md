@@ -2,6 +2,12 @@
 
 # Keylogger Changelog
 
+## [0.1.1] - 2024-02-20
+
+### Changed
+
+- Updated README with more details and roadmap
+
 ## [0.1.0] - 2024-02-16
 
 ### Added

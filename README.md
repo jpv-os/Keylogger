@@ -1,13 +1,12 @@
 # Keylogger
 
 ![Build](https://github.com/jpv-os/Keylogger/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/23746-Keylogger.svg)](https://plugins.jetbrains.com/plugin/23746-Keylogger)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/23746-Keylogger.svg)](https://plugins.jetbrains.com/plugin/23746-Keylogger)
+[![Version](https://img.shields.io/jetbrains/plugin/v/23746-keylogger.svg)](https://plugins.jetbrains.com/plugin/23746-keylogger)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/23746-keylogger.svg)](https://plugins.jetbrains.com/plugin/23746-keylogger)
 
 <!-- Plugin description -->
-This plugin provides a simple tool window to see your actions per minute when typing, clicking or performing IDE actions
-in the editor.
-<!-- Plugin description end -->
+
+This plugin provides a simple tool window to see statistics about your actions in the editor.
 
 ## Features
 
@@ -19,6 +18,8 @@ in the editor.
 - Configurable idle timeout
 
 ![Screenshot 1](assets/screenshot1.png)
+
+<!-- Plugin description end -->
 
 ## Roadmap
 
@@ -44,19 +45,28 @@ in the editor.
     - [x] Action/click/type listeners
     - [x] Create a simple tool window
     - [x] First (hidden) release
-- [ ] Minimum viable plugin
+- [x] Minimum viable plugin
     - [x] Persist data
     - [x] Make things like idle timeout configurable via plugin settings
-    - [x] CI/CD pipeline complete
-- [ ] General improvements before continuing
-    - [ ] Improve UI by implementing custom cell renderers etc. for tables
     - [x] Restore default settings button, delete database button in settings page
-    - [ ] Write tests
+- [ ] General improvements 
+    - [ ] Listen to "Editor Active" events to make sure the idle timeout is accurate and only one session is recorded
+    - [ ] Improve UI by implementing custom cell renderers etc. for tables
+    - [ ] Custom SVG icon
+    - [ ] Database schema validation on startup
+- [ ] Quality
     - [ ] Logging
+    - [ ] CI/CD pipeline complete
+    - [ ] Write meaningful tests
+    - [ ] Improve error handling
+    - [ ] Deal with dependabot
 - [ ] Future feature ideas
+    - [ ] Welcome Dialog
+    - [ ] Notifications (e.g. "Database successfully deleted")
+    - [ ] History of actions
     - [ ] Store entire SQLite database in plugin settings, so that it works with settings sync (allowed maximum size?)
     - [ ] Charts and visualizations
-    - [ ] Status bar widget
+    - [ ] Status bar widget that shows the current APM (or other statistics)
     - [ ] Progress bar that shows the idle timeout
     - [ ] Data export
     - [ ] Demo video (must be hosted on YouTube)
