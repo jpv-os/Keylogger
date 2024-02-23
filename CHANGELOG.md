@@ -8,11 +8,11 @@
 
 - Action history tab in tool window
 - IdeaVim compatibility mode: in INSERT mode, backspace emits two events, the regular backspace event and the custom IdeaVim event "Shortcuts", which is ignored if the plugin is in IdeaVim compatibility mode.
+- Custom plugin and toolwindow icons
 
 ### Changed
 
 - Plugin description section in the README file
-- Custom logo for the plugin
 
 ### Removed
 
