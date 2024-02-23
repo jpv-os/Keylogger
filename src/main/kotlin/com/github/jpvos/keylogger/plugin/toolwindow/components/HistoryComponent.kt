@@ -7,6 +7,7 @@ import com.github.jpvos.keylogger.plugin.services.CounterService
 import com.github.jpvos.keylogger.plugin.services.DatabaseService
 import com.github.jpvos.keylogger.plugin.settings.KeyloggerSettings
 import com.github.jpvos.keylogger.ui.Container
+import com.github.jpvos.keylogger.ui.DisplayFormat
 import com.github.jpvos.keylogger.ui.Table
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
@@ -45,7 +46,7 @@ class HistoryComponent : Container(), Counter.Listener, Disposable {
                     arrayOf(
                         action.type.toString(),
                         action.name,
-                        timestamp
+                        DisplayFormat.date(timestamp),
                     )
                 }
                 .toTypedArray()

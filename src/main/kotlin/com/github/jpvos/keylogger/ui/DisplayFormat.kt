@@ -1,5 +1,10 @@
 package com.github.jpvos.keylogger.ui
 
+import java.time.Instant
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+
 object DisplayFormat {
 
     fun text(value: String): String {
@@ -10,8 +15,10 @@ object DisplayFormat {
         return "%,d".format(value)
     }
 
-    fun milliseconds(value: Long): String {
-        return "${long(value)}ms"
+    fun date(value: Long): String {
+        return DateTimeFormatter.ISO_ZONED_DATE_TIME.format(
+            ZonedDateTime.ofInstant(Instant.ofEpochMilli(value), ZoneId.systemDefault())
+        )
     }
 
     fun decimal(value: Double): String {
