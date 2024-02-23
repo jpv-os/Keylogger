@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger.plugin.settings
+package com.github.jpvos.keylogger.plugin.services
 
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.intellij.openapi.application.ApplicationManager
@@ -10,7 +10,7 @@ import kotlin.io.path.Path
 
 
 @State(
-    name = "com.github.jpvos.keylogger.plugin.settings.KeyloggerSettings",
+    name = "com.github.jpvos.keylogger.plugin.services.KeyloggerSettings",
     storages = [Storage("Keylogger.xml")]
 )
 internal class KeyloggerSettings : PersistentStateComponent<KeyloggerSettings> {

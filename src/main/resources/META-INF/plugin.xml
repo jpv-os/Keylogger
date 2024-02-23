@@ -11,25 +11,22 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable
                 parentId="tools"
-                instance="com.github.jpvos.keylogger.plugin.settings.KeyloggerConfigurable"
-                id="com.github.jpvos.keylogger.plugin.settings.KeyloggerConfigurable"
+                instance="com.github.jpvos.keylogger.plugin.configurable.KeyloggerConfigurable"
+                id="com.github.jpvos.keylogger.plugin.configurable.KeyloggerConfigurable"
                 displayName="Keylogger"/>
         <toolWindow
                 factoryClass="com.github.jpvos.keylogger.plugin.toolwindow.KeyloggerToolWindowFactory"
-                icon="AllIcons.Actions.Lightning"
+                icon="/META-INF/toolwindowIcon.svg"
                 id="Keylogger"/>
         <editorFactoryMouseListener
-                implementation="com.github.jpvos.keylogger.plugin.listeners.KeyloggerListener"/>
+                implementation="com.github.jpvos.keylogger.plugin.listeners.KeyloggerMouseListener"/>
         <applicationService
-                serviceImplementation="com.github.jpvos.keylogger.plugin.settings.KeyloggerSettings"/>
+                serviceImplementation="com.github.jpvos.keylogger.plugin.services.KeyloggerSettings"/>
     </extensions>
 
-    <applicationListeners>
+    <projectListeners>
         <listener
-                class="com.github.jpvos.keylogger.plugin.listeners.KeyloggerListener"
-                topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-        <listener
-                class="com.github.jpvos.keylogger.plugin.listeners.KeyloggerListener"
+                class="com.github.jpvos.keylogger.plugin.listeners.KeyloggerActionListener"
                 topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
-    </applicationListeners>
+    </projectListeners>
 </idea-plugin>

@@ -6,7 +6,7 @@
 
 <!-- Plugin description -->
 
-## Features
+**Keylogger** tracks your actions in the editor and shows statistics like actions per minute.
 
 - Listens for actions in the editor (typing, clicking, shortcuts)
 - Tracks active and idle time
@@ -74,10 +74,10 @@ This plugin is still in its early stages. The following roadmap is a rough outli
 - [ ] General improvements 
     - [x] History of actions
     - [x] Restore default settings button, delete database button in settings page
-    - [ ] Make sure only one instance of the action counter is running (problem with multiple IDE windows open)
     - [ ] Improve UI by implementing custom cell renderers etc. for tables
     - [ ] Database schema validation on startup
 - [ ] Code Quality
+    - [ ] Documentation 
     - [ ] Logging
     - [ ] Write meaningful tests
     - [ ] Improve error handling
@@ -86,18 +86,19 @@ This plugin is still in its early stages. The following roadmap is a rough outli
 - [ ] Future feature ideas
     - [ ] Welcome Dialog / First Run Wizard
     - [ ] Notifications (e.g. "Database successfully deleted", "1 million actions reached" etc.)
-    - [ ] Configurable Action ignore list
-    - [ ] Store actions database in plugin settings, so that it works with settings sync (allowed maximum size?)
+    - [ ] Configurable Action ignore list (currently, the IdeaVim compatibility mode ignoes the "Shortcuts" action - why not let the user create an ignore list?)
+    - [ ] Store actions database in plugin settings instead of file, so that it works with settings sync (allowed maximum size?)
     - [ ] Charts and visualizations in tool window
     - [ ] IDE status bar widget that shows the current APM (or other statistics)
     - [ ] IDE progress bar that shows the idle timeout
     - [ ] Persistent state component for customizable toolwindow layout
-    - [ ] Write a devlog and publish it on GitHub Pages
 - [ ] Version 1.0.0
-    - [ ] Custom SVG icon
+    - [x] Custom SVG icon
     - [ ] CI/CD pipeline complete
     - [ ] Demo video (must be hosted on YouTube)
     - [ ] Comprehensive usage guide (also as YouTube video?)
+    - [ ] Contribution guide
+    - [ ] Issue/Feature request templates
 
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].

@@ -4,9 +4,7 @@ import com.github.jpvos.keylogger.core.Action
 import com.github.jpvos.keylogger.core.Counter
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.github.jpvos.keylogger.plugin.services.CounterService
-import com.github.jpvos.keylogger.ui.Container
-import com.github.jpvos.keylogger.ui.DisplayFormat
-import com.github.jpvos.keylogger.ui.Table
+import com.github.jpvos.keylogger.core.DisplayFormat
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 

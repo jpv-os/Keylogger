@@ -1,9 +1,10 @@
-package com.github.jpvos.keylogger.plugin.settings
+package com.github.jpvos.keylogger.plugin.configurable
 
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.github.jpvos.keylogger.plugin.services.CounterService
 import com.github.jpvos.keylogger.plugin.services.DatabaseService
-import com.github.jpvos.keylogger.plugin.settings.components.KeyloggerSettingsComponent
+import com.github.jpvos.keylogger.plugin.services.KeyloggerSettings
+import com.github.jpvos.keylogger.plugin.configurable.components.KeyloggerSettingsComponent
 import com.intellij.openapi.components.service
 import com.intellij.openapi.options.SearchableConfigurable
 import javax.swing.JComponent

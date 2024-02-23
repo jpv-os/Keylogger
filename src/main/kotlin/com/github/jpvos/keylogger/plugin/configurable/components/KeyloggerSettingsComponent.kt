@@ -1,7 +1,6 @@
-package com.github.jpvos.keylogger.plugin.settings.components
+package com.github.jpvos.keylogger.plugin.configurable.components
 
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
-import com.github.jpvos.keylogger.ui.Container
 import com.intellij.ide.ui.UINumericRange
 import com.intellij.ui.JBIntSpinner
 import com.intellij.ui.components.JBCheckBox

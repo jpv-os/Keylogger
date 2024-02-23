@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger.db
+package com.github.jpvos.keylogger.plugin.db
 
 import java.io.File
 import java.sql.*

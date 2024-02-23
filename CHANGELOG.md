@@ -2,6 +2,22 @@
 
 # Keylogger Changelog
 
+## [0.2.0] - 2024-02-22
+
+### Added
+
+- Action history tab in tool window
+- IdeaVim compatibility mode: in INSERT mode, backspace emits two events, the regular backspace event and the custom IdeaVim event "Shortcuts", which is ignored if the plugin is in IdeaVim compatibility mode.
+
+### Changed
+
+- Plugin description section in the README file
+- Custom logo for the plugin
+
+### Removed
+
+- Removed the `pluginUntilBuild` limitation that prevented the plugin from being installed on early access builds
+
 ## [0.1.1] - 2024-02-20
 
 ### Changed

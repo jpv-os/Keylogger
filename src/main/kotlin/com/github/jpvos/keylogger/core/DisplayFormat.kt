@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger.ui
+package com.github.jpvos.keylogger.core
 
 import java.time.Instant
 import java.time.ZoneId

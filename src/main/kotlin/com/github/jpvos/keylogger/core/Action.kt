@@ -7,6 +7,25 @@ data class Action(
     enum class Type {
         Mouse,
         Keystroke,
-        EditorAction
+        EditorAction;
+
+        companion object {
+            fun parse(type: String): Type {
+                return when (type) {
+                    "Mouse" -> Mouse
+                    "Keystroke" -> Keystroke
+                    "EditorAction" -> EditorAction
+                    else -> throw IllegalArgumentException("Unknown action type: $type")
+                }
+            }
+        }
+
+        override fun toString(): String {
+            return when (this) {
+                Mouse -> "Mouse"
+                Keystroke -> "Keystroke"
+                EditorAction -> "EditorAction"
+            }
+        }
     }
 }
