@@ -6,12 +6,14 @@
 
 <!-- Plugin description -->
 
-**Keylogger** tracks your actions in the editor and shows statistics like actions per minute.
+**Keylogger** tracks your actions in the editor, stores them in a local database file and shows statistics like actions per minute.
+
+
 
 - Listens for actions in the editor (typing, clicking, shortcuts)
 - Tracks active and idle time
 - Stores the actions in a local SQLite database file
-- Shows a simple tool window with an action counter and statistics like actions per minute
+- Provides a tool window with statistics, an action counter and a history of actions
 - Allows customizing the database file location and idle timeout
 
 <!-- Plugin description end -->
