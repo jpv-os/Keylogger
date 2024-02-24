@@ -48,7 +48,7 @@
 
 This plugin is still in its early stages. The following roadmap is a rough outline of the next steps
 
-- [ ] Start with template project
+- [x] Start with template project
     - [x] Create a new [IntelliJ Platform Plugin Template][template] project.
     - [x] Get familiar with the [template documentation][template].
     - [x] Adjust the [pluginGroup](./gradle.properties), [plugin ID](./src/main/resources/META-INF/plugin.xml)
@@ -59,10 +59,10 @@ This plugin is still in its early stages. The following roadmap is a rough outli
     - [x] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate)
       for the first time.
     - [x] Set the `PLUGIN_ID` in the above README badges.
-    - [ ] Set
+    - [x] Set
       the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate)
       related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-    - [ ] Set
+    - [x] Set
       the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
     - [x] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be
       notified about releases containing new features and fixes.
@@ -78,13 +78,11 @@ This plugin is still in its early stages. The following roadmap is a rough outli
     - [x] Restore default settings button, delete database button in settings page
     - [ ] Improve UI by implementing custom cell renderers etc. for tables
     - [ ] Database schema validation on startup
+    - [ ] Improve error handling, make critical features more robust (what happens if database file is deleted while running, ...)
 - [ ] Code Quality
-    - [ ] Documentation 
-    - [ ] Logging
-    - [ ] Write meaningful tests
-    - [ ] Improve error handling
-    - [ ] Dependabot version bumps
-    - [ ] Host code reports on GitHub Pages
+    - [ ] Code fully documented 
+    - [ ] Logging for critical features (DB connection) to make error reporting easier
+    - [ ] Write meaningful tests (Unit tests, UI tests, ...?)
 - [ ] Future feature ideas
     - [ ] Welcome Dialog / First Run Wizard
     - [ ] Notifications (e.g. "Database successfully deleted", "1 million actions reached" etc.)
@@ -95,11 +93,8 @@ This plugin is still in its early stages. The following roadmap is a rough outli
     - [ ] IDE progress bar that shows the idle timeout
     - [ ] Persistent state component for customizable toolwindow layout
 - [ ] Version 1.0.0
-    - [x] Custom SVG icon
-    - [ ] CI/CD pipeline complete
     - [ ] Demo video (must be hosted on YouTube)
     - [ ] Comprehensive usage guide (also as YouTube video?)
-    - [ ] Contribution guide
     - [ ] Issue/Feature request templates
 
 ---
