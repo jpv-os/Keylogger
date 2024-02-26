@@ -7,11 +7,9 @@ import com.intellij.openapi.editor.event.EditorMouseEvent
 import com.intellij.openapi.editor.event.EditorMouseListener
 
 internal class KeyloggerMouseListener : EditorMouseListener {
-    private val counterService = service<CounterService>()
-
     override fun mousePressed(event: EditorMouseEvent) {
         super.mousePressed(event)
-        counterService.counter.next(
+        service<CounterService>().counter.next(
             Action(
                 Action.Type.Mouse,
                 when (event.mouseEvent.button) {

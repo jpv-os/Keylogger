@@ -2,18 +2,17 @@ package com.github.jpvos.keylogger.plugin.toolwindow.components
 
 import com.github.jpvos.keylogger.core.Action
 import com.github.jpvos.keylogger.core.Counter
+import com.github.jpvos.keylogger.core.DisplayFormat
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.github.jpvos.keylogger.plugin.services.CounterService
 import com.github.jpvos.keylogger.plugin.services.DatabaseService
-import com.github.jpvos.keylogger.plugin.services.KeyloggerSettings
-import com.github.jpvos.keylogger.core.DisplayFormat
+import com.github.jpvos.keylogger.plugin.services.SettingsService
+import com.github.jpvos.keylogger.plugin.util.Container
+import com.github.jpvos.keylogger.plugin.util.Table
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 
 class HistoryComponent : Container(), Counter.Listener, Disposable {
-
-    private val counterService = service<CounterService>()
-    private val databaseService = service<DatabaseService>()
     private val table = Table(
         arrayOf(
             KeyloggerBundle.message("history.table.type"),
@@ -25,7 +24,7 @@ class HistoryComponent : Container(), Counter.Listener, Disposable {
     init {
         add(table)
         updateTableData()
-        counterService.counter.registerListener(this)
+        service<CounterService>().counter.registerListener(this)
     }
 
     override fun onAction(action: Action) {
@@ -33,11 +32,12 @@ class HistoryComponent : Container(), Counter.Listener, Disposable {
     }
 
     override fun dispose() {
-        counterService.counter.unregisterListener(this)
+        service<CounterService>().counter.unregisterListener(this)
     }
 
     private fun updateTableData() {
-        val history = databaseService.queryActionsHistory(KeyloggerSettings.instance.historySize)
+        // TODO: query history only once and then keep updating, add a restore function
+        val history = service<DatabaseService>().queryActionsHistory(service<SettingsService>().historySize.toLong())
         table.setTableData(
             history
                 .map { (action, timestamp) ->

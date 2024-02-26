@@ -1,6 +1,7 @@
 package com.github.jpvos.keylogger.plugin.db
 
 import java.io.File
+import java.nio.file.Path
 import java.sql.*
 
 class SqliteDatabaseConnection {
@@ -11,18 +12,19 @@ class SqliteDatabaseConnection {
     val open: Boolean
         get() = !(connection?.isClosed ?: true)
 
-    fun connect(url: String) {
+    fun connect(path: Path) {
         try {
             Class.forName("org.sqlite.JDBC")
         } catch (e: ClassNotFoundException) {
             throw Error("Error while loading JDBC driver", e)
         }
         try {
-            val file = File(url)
+            val file = File(path.toString())
             if (!file.exists()) {
                 file.parentFile.mkdirs()
             }
-            connection = DriverManager.getConnection("jdbc:sqlite:file:${url}")
+            val url = "jdbc:sqlite:file:$path"
+            connection = DriverManager.getConnection(url)
         } catch (e: SQLException) {
             throw Error("Error while establishing connection to database", e)
         }

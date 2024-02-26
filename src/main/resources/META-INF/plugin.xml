@@ -21,7 +21,8 @@
         <editorFactoryMouseListener
                 implementation="com.github.jpvos.keylogger.plugin.listeners.KeyloggerMouseListener"/>
         <applicationService
-                serviceImplementation="com.github.jpvos.keylogger.plugin.services.KeyloggerSettings"/>
+                serviceImplementation="com.github.jpvos.keylogger.plugin.services.SettingsService"/>
+        <notificationGroup displayType="BALLOON" id="Keylogger" key="notification.group.name" />
     </extensions>
 
     <projectListeners>

@@ -6,15 +6,8 @@
 
 <!-- Plugin description -->
 
-**Keylogger** tracks your actions in the editor, stores them in a local database file and shows statistics like actions per minute.
-
-
-
-- Listens for actions in the editor (typing, clicking, shortcuts)
-- Tracks active and idle time
-- Stores the actions in a local SQLite database file
-- Provides a tool window with statistics, an action counter and a history of actions
-- Allows customizing the database file location and idle timeout
+**Keylogger** is an open source plugin that tracks your actions in the editor, 
+keeps a history in a local database file and shows statistics like actions per minute.
 
 <!-- Plugin description end -->
 
@@ -42,7 +35,6 @@
 
   Download the [latest release](https://github.com/jpv-os/Keylogger/releases/latest) and install it manually using
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
-
 
 ## Development Roadmap
 

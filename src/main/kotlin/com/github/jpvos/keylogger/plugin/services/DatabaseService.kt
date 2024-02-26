@@ -4,6 +4,7 @@ import com.github.jpvos.keylogger.core.Action
 import com.github.jpvos.keylogger.plugin.db.SqliteDatabaseConnection
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.Service
+import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
 
 @Service
@@ -20,7 +21,7 @@ class DatabaseService : Disposable {
 
     fun restoreDatabase() {
         dispose()
-        db.connect(KeyloggerSettings.instance.databaseURL)
+        connect()
         db.statement("CREATE TABLE IF NOT EXISTS actions (type TEXT NOT NULL, name TEXT NOT NULL, timestamp LONG NOT NULL)")
     }
 
@@ -64,6 +65,7 @@ class DatabaseService : Disposable {
         verifyDatabaseConnection()
         // this implementation is not efficient, but it is good enough for now. will it stand the test of time?
         return db.query("SELECT timestamp FROM actions ORDER BY timestamp ASC") {
+            val idleTimeout = service<SettingsService>().idleTimeout
             val timerStart = System.currentTimeMillis()
             var currentTime: Long? = null
             var activeTime = 0L
@@ -74,7 +76,7 @@ class DatabaseService : Disposable {
                     currentTime = timestamp
                 }
                 val deltaTime = timestamp - currentTime
-                if (deltaTime < KeyloggerSettings.instance.idleTimeout) {
+                if (deltaTime < idleTimeout) {
                     activeTime += deltaTime
                 } else {
                     idleTime += deltaTime
@@ -94,6 +96,16 @@ class DatabaseService : Disposable {
             setString(2, action.name)
             setLong(3, System.currentTimeMillis())
         }
+    }
+
+    fun cleanIdeaVimActions() {
+        verifyDatabaseConnection()
+        db.statement("DELETE FROM actions WHERE name = 'Shortcuts' AND type = 'EditorAction'")
+    }
+
+    private fun connect() {
+        if (db.open) db.close()
+        db.connect(service<SettingsService>().activeDatabaseUrl)
     }
 
     private fun verifyDatabaseConnection() {
