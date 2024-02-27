@@ -12,6 +12,8 @@ import com.github.jpvos.keylogger.plugin.util.Table
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 
+// TODO: aktualisiert aktuell einen tick zu spät
+// TODO: aktualisieren auch die anderen services aktuell einen tick zu spät?
 class HistoryComponent : Container(), Counter.Listener, Disposable {
     private val table = Table(
         arrayOf(

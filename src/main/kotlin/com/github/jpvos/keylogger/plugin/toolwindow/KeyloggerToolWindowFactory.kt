@@ -2,6 +2,7 @@ package com.github.jpvos.keylogger.plugin.toolwindow
 
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.github.jpvos.keylogger.plugin.toolwindow.components.ActionCounterComponent
+import com.github.jpvos.keylogger.plugin.toolwindow.components.ChartsComponent
 import com.github.jpvos.keylogger.plugin.toolwindow.components.HistoryComponent
 import com.github.jpvos.keylogger.plugin.toolwindow.components.OverviewComponent
 import com.intellij.openapi.project.Project
@@ -20,6 +21,7 @@ class KeyloggerToolWindowFactory : ToolWindowFactory {
         addTab(KeyloggerBundle.message("toolWindow.overview"), OverviewComponent())
         addTab(KeyloggerBundle.message("toolWindow.actionCounter"), ActionCounterComponent())
         addTab(KeyloggerBundle.message("toolWindow.history"), HistoryComponent())
+        addTab(KeyloggerBundle.message("toolWindow.charts"), ChartsComponent())
     }
 
     override fun shouldBeAvailable(project: Project) = true
