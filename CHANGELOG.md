@@ -2,14 +2,14 @@
 
 # Keylogger Changelog
 
-## [Unreleased]
+## [0.3.0] - 2024-02-28
 
 ### Changed
 
-- Optimize plugin description length for the JetBrains Marketplace layout
+- Breaking change: settings now uses a different persistence key, so the previous settings will be lost.
 - Greatly improved the plugin settings page
 - Added a new setting for using database file paths relative to the default home directory for better interop with Settings Sync
-- Breaking change: settings now uses a different persistence key, so the previous settings will be lost.
+- Optimize plugin description length for the JetBrains Marketplace layout
 
 ## [0.2.1] - 2024-02-24
 

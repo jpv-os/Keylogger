@@ -21,7 +21,7 @@ class KeyloggerToolWindowFactory : ToolWindowFactory {
         addTab(KeyloggerBundle.message("toolWindow.overview"), OverviewComponent())
         addTab(KeyloggerBundle.message("toolWindow.actionCounter"), ActionCounterComponent())
         addTab(KeyloggerBundle.message("toolWindow.history"), HistoryComponent())
-        addTab(KeyloggerBundle.message("toolWindow.charts"), ChartsComponent())
+        // addTab(KeyloggerBundle.message("toolWindow.charts"), ChartsComponent())
     }
 
     override fun shouldBeAvailable(project: Project) = true
