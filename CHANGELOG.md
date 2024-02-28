@@ -49,8 +49,6 @@
 
 ### Added
 
-- Initial scaffold created
-  from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
 - Prototype implementation of action/click/type listeners and basic services
 - Simple tool window to display actions per minute
 - Setup README and CHANGELOG
@@ -58,3 +56,9 @@
 - Store data in SQLite database
 - Make database URL and idle timeout configurable via plugin settings
 - Add a simple settings page to configure database URL and idle timeout
+
+## [Unreleased] - 2024-02-09
+
+### Added
+
+- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
