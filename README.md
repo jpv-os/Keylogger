@@ -6,8 +6,7 @@
 
 <!-- Plugin description -->
 
-**Keylogger** is an open source plugin that tracks your actions in the editor, 
-keeps a history in a local database file and shows statistics like actions per minute.
+**Keylogger** is an open source plugin that tracks your actions in the editor, keeps a history and shows statistics.
 
 <!-- Plugin description end -->
 
