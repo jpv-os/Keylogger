@@ -2,6 +2,8 @@
 
 # Keylogger Changelog
 
+## [Unreleased]
+
 ## [0.3.1] - 2024-02-29
 
 ### Changed
@@ -63,8 +65,11 @@
 - Make database URL and idle timeout configurable via plugin settings
 - Add a simple settings page to configure database URL and idle timeout
 
-## [Unreleased] - 2024-02-09
-
-### Added
-
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/jpv-os/Keylogger/compare/v0.3.0...v0.3.1
+[0.3.0]: https://github.com/jpv-os/Keylogger/compare/v0.2.1...v0.3.0
+[0.2.1]: https://github.com/jpv-os/Keylogger/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/jpv-os/Keylogger/compare/v0.1.1...v0.2.0
+[0.1.1]: https://github.com/jpv-os/Keylogger/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/jpv-os/Keylogger/compare/v0.0.1...v0.1.0
+[0.0.1]: https://github.com/jpv-os/Keylogger/commits/v0.0.1
