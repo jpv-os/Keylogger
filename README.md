@@ -37,7 +37,7 @@
 
 ## Development Roadmap
 
-This plugin is still in its early stages. The following roadmap is a rough outline of the next steps
+This plugin is still in its early stages. The following roadmap is a rough outline of the next steps:
 
 - [x] Start with template project
     - [x] Create a new [IntelliJ Platform Plugin Template][template] project.
@@ -68,7 +68,7 @@ This plugin is still in its early stages. The following roadmap is a rough outli
     - [x] History of actions
     - [x] Restore default settings button, delete database button in settings page
     - [ ] Improve UI by implementing custom cell renderers etc. for tables
-    - [ ] Database schema validation on startup
+    - [x] Database schema validation on startup
     - [ ] Improve error handling, make critical features more robust (what happens if database file is deleted while running, ...)
 - [ ] Code Quality
     - [ ] Code fully documented 

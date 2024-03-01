@@ -15,7 +15,7 @@ import org.knowm.xchart.style.PieStyler
 
 
 class ChartsComponent :  JBPanel<JBPanel<*>>(), Counter.Listener, Disposable {
-    private val actions = service<DatabaseService>().queryActionsMap().toMutableMap()
+    private val actions = service<DatabaseService>().connection.queryActionHistogram().toMutableMap()
     private val pieChart: PieChart = PieChartBuilder()
         .title("Actions")
         .width(800)

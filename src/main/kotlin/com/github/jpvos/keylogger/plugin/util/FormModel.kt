@@ -25,6 +25,8 @@ class FormModel<T : Enum<T>> {
             it as FormControl<R>
         } ?: throw NoSuchElementException("Input not found: $field")
 
+    fun getComponent(field: T) = get<Any?>(field).component
+
     private fun add(name: T, input: FormControl<*>) {
         formControls[name] = input
     }

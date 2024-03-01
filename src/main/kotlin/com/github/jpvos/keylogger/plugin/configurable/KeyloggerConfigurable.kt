@@ -7,7 +7,6 @@ import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.ui.JBColor
-import com.intellij.ui.components.JBLabel
 import javax.swing.JComponent
 
 class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, Disposable {
@@ -24,44 +23,6 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
     }
 
     /**
-     * @see [SearchableConfigurable.createComponent].
-     */
-    override fun createComponent(): JComponent = form.layout.build()
-
-    /**
-     * @see [SearchableConfigurable.isModified].
-     */
-    override fun isModified(): Boolean = form.model.modified
-
-    /**
-     * @see [SearchableConfigurable.apply].
-     */
-    override fun apply() = service<SettingsService>().update(
-        databaseURL = form.model.get<String>(SettingsFormFields.DATABASE_URL).value,
-        databaseURLRelative = form.model.get<Boolean>(SettingsFormFields.DATABASE_URL_RELATIVE).value,
-        idleTimeout = form.model.get<Int>(SettingsFormFields.IDLE_TIMEOUT).value,
-        historySize = form.model.get<Int>(SettingsFormFields.HISTORY_SIZE).value,
-        ideaVim = form.model.get<Boolean>(SettingsFormFields.IDEA_VIM).value
-    )
-
-    override fun getDisplayName() = KeyloggerBundle.message("settings.displayName")
-
-    /**
-     * @see [SearchableConfigurable.getId].
-     */
-    override fun getId() = "com.github.jpvos.keylogger.plugin.configurable.KeyloggerConfigurable"
-
-    /**
-     * @see [SearchableConfigurable.getPreferredFocusedComponent].
-     */
-    override fun getPreferredFocusedComponent() = form.model.get<Any?>(SettingsFormFields.DATABASE_URL).component
-
-    /**
-     * A label to display the active database URL that is used throughout the form.
-     */
-    private val labelActiveDatabaseUrl = JBLabel()
-
-    /**
      * The form used to display and edit the settings.
      */
     private val form = Form.create<SettingsFormFields> {
@@ -70,12 +31,15 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
             textField(
                 SettingsFormFields.DATABASE_URL,
                 KeyloggerBundle.message("settings.form.databaseURL.label")
-            ) { settingsService.databaseURL }
+            ) {
+                settingsService.state.databaseURL
+            }
             checkbox(
                 SettingsFormFields.DATABASE_URL_RELATIVE,
                 KeyloggerBundle.message("settings.form.databaseURLRelative.checkbox")
-            ) { settingsService.databaseURLRelative }
-            component(labelActiveDatabaseUrl)
+            ) {
+                settingsService.state.databaseURLRelative
+            }
             labelGroup {
                 default(KeyloggerBundle.message("settings.form.databaseURLRelative.default"))
                 note(KeyloggerBundle.message("settings.form.databaseURLRelative.note"))
@@ -87,7 +51,9 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
             numberField(
                 SettingsFormFields.IDLE_TIMEOUT,
                 KeyloggerBundle.message("settings.form.idleTimeout.label")
-            ) { settingsService.idleTimeout.toInt() }
+            ) {
+                settingsService.state.idleTimeout
+            }
             labelGroup {
                 default(KeyloggerBundle.message("settings.form.idleTimeout.default"))
                 note(KeyloggerBundle.message("settings.form.idleTimeout.note"))
@@ -97,7 +63,9 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
             numberField(
                 SettingsFormFields.HISTORY_SIZE,
                 KeyloggerBundle.message("settings.form.historySize.label")
-            ) { settingsService.historySize.toInt() }
+            ) {
+                settingsService.state.historySize
+            }
             labelGroup {
                 default(KeyloggerBundle.message("settings.form.historySize.default"))
                 hint(KeyloggerBundle.message("settings.form.historySize.hint"))
@@ -107,7 +75,9 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
             checkbox(
                 SettingsFormFields.IDEA_VIM,
                 KeyloggerBundle.message("settings.form.ideaVim.checkbox")
-            ) { settingsService.ideaVim }
+            ) {
+                settingsService.state.ideaVim
+            }
             labelGroup {
                 default(KeyloggerBundle.message("settings.form.ideaVim.default"))
                 note(KeyloggerBundle.message("settings.form.ideaVim.note"))
@@ -117,7 +87,6 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
             labelGroup {
                 warning(KeyloggerBundle.message("settings.dangerZone.warning"))
             }
-            component(labelActiveDatabaseUrl)
             gap()
             button(KeyloggerBundle.message("settings.restoreDefaults"), JBColor.RED) {
                 settingsService.restoreDefaultSettings()
@@ -138,23 +107,64 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
         service<SettingsService>().registerListener(this)
     }
 
+    /**
+     * @see [SearchableConfigurable.apply].
+     */
+    override fun apply() {
+        val formState = SettingsService.State(
+            databaseURL = form.model.get<String>(SettingsFormFields.DATABASE_URL).value,
+            databaseURLRelative = form.model.get<Boolean>(SettingsFormFields.DATABASE_URL_RELATIVE).value,
+            idleTimeout = form.model.get<Int>(SettingsFormFields.IDLE_TIMEOUT).value,
+            historySize = form.model.get<Int>(SettingsFormFields.HISTORY_SIZE).value,
+            ideaVim = form.model.get<Boolean>(SettingsFormFields.IDEA_VIM).value
+        )
+        service<SettingsService>().update(formState)
+    }
+
+    /**
+     * @see [SearchableConfigurable.createComponent].
+     */
+    override fun createComponent(): JComponent = form.layout.build()
+
+    /**
+     * @see [SearchableConfigurable.isModified].
+     */
+    override fun isModified(): Boolean = form.model.modified
+
+    /**
+     * @see [SearchableConfigurable.getDisplayName].
+     */
+    override fun getDisplayName() = KeyloggerBundle.message("settings.displayName")
+
+    /**
+     * @see [SearchableConfigurable.getId].
+     */
+    override fun getId() = "com.github.jpvos.keylogger.plugin.configurable.KeyloggerConfigurable"
+
+    /**
+     * @see [SearchableConfigurable.getPreferredFocusedComponent].
+     */
+    override fun getPreferredFocusedComponent() = form.model.getComponent(SettingsFormFields.DATABASE_URL)
+
+    /**
+     * @see [Disposable.dispose].
+     */
     override fun dispose() {
         service<SettingsService>().unregisterListener(this)
     }
 
+    /**
+     * @see [SettingsService.Listener.onSettingsChange].
+     */
     override fun onSettingsChange() {
         reset()
     }
 
+    /**
+     * @see [SearchableConfigurable.reset].
+     */
     override fun reset() {
         form.model.reset()
-        labelActiveDatabaseUrl.text =
-            "<html>${
-                KeyloggerBundle.message(
-                    "settings.form.databaseURL.current",
-                    service<SettingsService>().activeDatabaseUrl
-                )
-            }</html>"
     }
 
 }

@@ -43,8 +43,8 @@ class ActionCounterComponent : Container(), Counter.Listener, Disposable {
                 .sortedByDescending { it.second }
                 .map {
                     arrayOf(
-                        DisplayFormat.text(it.first.type.toString()),
-                        DisplayFormat.text(it.first.name),
+                        it.first.type.toString(),
+                        it.first.name,
                         DisplayFormat.long(it.second),
                         DisplayFormat.percent01(it.second.toDouble() / state.totalActions.toDouble())
                     )

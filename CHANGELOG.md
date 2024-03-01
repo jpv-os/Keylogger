@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Code cleanup, added documentation
+
 ## [0.3.1] - 2024-02-29
 
 ### Changed

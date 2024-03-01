@@ -7,18 +7,14 @@ import java.time.format.DateTimeFormatter
 
 object DisplayFormat {
 
-    fun text(value: String): String {
-        return value
-    }
-
     fun long(value: Long): String {
         return "%,d".format(value)
     }
 
     fun date(value: Long): String {
-        return DateTimeFormatter.ISO_ZONED_DATE_TIME.format(
-            ZonedDateTime.ofInstant(Instant.ofEpochMilli(value), ZoneId.systemDefault())
-        )
+        return DateTimeFormatter
+            .ofPattern("yy-MM-dd HH:mm:ss:SSS (z)")
+            .format(ZonedDateTime.ofInstant(Instant.ofEpochMilli(value), ZoneId.systemDefault()))
     }
 
     fun decimal(value: Double): String {

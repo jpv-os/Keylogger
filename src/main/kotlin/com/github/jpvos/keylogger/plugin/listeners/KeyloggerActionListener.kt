@@ -14,7 +14,7 @@ internal class KeyloggerActionListener : AnActionListener {
     override fun afterActionPerformed(action: AnAction, event: AnActionEvent, result: AnActionResult) {
         super.afterActionPerformed(action, event, result)
         val actionName = action.templatePresentation.text?.toString() ?: return
-        if (actionName == "Shortcuts" && service<SettingsService>().ideaVim) {
+        if (actionName == SettingsService.IDEA_VIM_ACTION_NAME && service<SettingsService>().state.ideaVim) {
             // When using the IdeaVim plugin,
             // the backspace key triggers both the "Backspace" and "Shortcuts" actions.
             // Therefore, we ignore the "Shortcuts" action.

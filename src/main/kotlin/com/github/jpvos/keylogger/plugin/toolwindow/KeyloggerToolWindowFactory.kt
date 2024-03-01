@@ -21,6 +21,7 @@ class KeyloggerToolWindowFactory : ToolWindowFactory {
         addTab(KeyloggerBundle.message("toolWindow.overview"), OverviewComponent())
         addTab(KeyloggerBundle.message("toolWindow.actionCounter"), ActionCounterComponent())
         addTab(KeyloggerBundle.message("toolWindow.history"), HistoryComponent())
+        // TODO enable this tab
         // addTab(KeyloggerBundle.message("toolWindow.charts"), ChartsComponent())
     }
 

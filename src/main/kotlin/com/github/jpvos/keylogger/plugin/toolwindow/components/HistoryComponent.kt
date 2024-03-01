@@ -12,8 +12,6 @@ import com.github.jpvos.keylogger.plugin.util.Table
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 
-// TODO: aktualisiert aktuell einen tick zu spät
-// TODO: aktualisieren auch die anderen services aktuell einen tick zu spät?
 class HistoryComponent : Container(), Counter.Listener, Disposable {
     private val table = Table(
         arrayOf(
@@ -38,8 +36,7 @@ class HistoryComponent : Container(), Counter.Listener, Disposable {
     }
 
     private fun updateTableData() {
-        // TODO: query history only once and then keep updating, add a restore function
-        val history = service<DatabaseService>().queryActionsHistory(service<SettingsService>().historySize.toLong())
+        val history = service<DatabaseService>().connection.queryActionHistory(service<SettingsService>().state.historySize.toLong())
         table.setTableData(
             history
                 .map { (action, timestamp) ->

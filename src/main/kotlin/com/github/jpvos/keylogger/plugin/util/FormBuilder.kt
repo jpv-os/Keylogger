@@ -28,7 +28,7 @@ class FormBuilder<T : Enum<T>>(private val formModel: FormModel<T>) {
                 foreground = JBColor.GRAY
                 font = font.deriveFont(font.style or Font.BOLD)
             }, SCALING)
-            fb.addComponent(JBLabel("<html>$text</html>").apply {
+            fb.addComponent(JBLabel(text).apply {
                 foreground = JBColor.GRAY
             })
         }
@@ -39,7 +39,7 @@ class FormBuilder<T : Enum<T>>(private val formModel: FormModel<T>) {
         private val formModel: FormModel<T>
     ) {
 
-        fun button(text: String, color: Color? = null, action: () -> Unit) = JButton("<html>$text</html>").apply {
+        fun button(text: String, color: Color? = null, action: () -> Unit) = JButton(text).apply {
             addActionListener {
                 DialogBuilder().apply {
                     setTitle(KeyloggerBundle.message("settings.dialog.title"))
@@ -50,7 +50,7 @@ class FormBuilder<T : Enum<T>>(private val formModel: FormModel<T>) {
                     setCancelOperation {
                         dialogWrapper.close(1)
                     }
-                    setCenterPanel(JBLabel("<html>${KeyloggerBundle.message("settings.dialog.message")}</html>"))
+                    setCenterPanel(JBLabel(KeyloggerBundle.message("settings.dialog.message")))
                     show()
                 }
             }
@@ -61,10 +61,6 @@ class FormBuilder<T : Enum<T>>(private val formModel: FormModel<T>) {
         }
 
         fun labelGroup(body: LabelsBuilder.() -> Unit) = LabelsBuilder(fb).apply(body)
-
-        fun component(component: JComponent): JComponent = component.apply {
-            fb.addComponent(this, SCALING)
-        }
 
         private fun input(
             input: T,
