@@ -2,7 +2,7 @@ package com.github.jpvos.keylogger.plugin.configurable
 
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.github.jpvos.keylogger.plugin.services.SettingsService
-import com.github.jpvos.keylogger.plugin.util.Form
+import com.github.jpvos.keylogger.plugin.util.forms.Form
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 import com.intellij.openapi.options.SearchableConfigurable
@@ -14,7 +14,7 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
     /**
      * The fields of the settings form.
      */
-    enum class SettingsFormFields {
+    enum class SettingsFormField {
         DATABASE_URL,
         DATABASE_URL_RELATIVE,
         IDLE_TIMEOUT,
@@ -25,17 +25,17 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
     /**
      * The form used to display and edit the settings.
      */
-    private val form = Form.create<SettingsFormFields> {
+    private val form = Form.create<SettingsFormField> {
         val settingsService = service<SettingsService>()
         section(KeyloggerBundle.message("settings.form.header.actionDatabase")) {
             textField(
-                SettingsFormFields.DATABASE_URL,
+                SettingsFormField.DATABASE_URL,
                 KeyloggerBundle.message("settings.form.databaseURL.label")
             ) {
                 settingsService.state.databaseURL
             }
             checkbox(
-                SettingsFormFields.DATABASE_URL_RELATIVE,
+                SettingsFormField.DATABASE_URL_RELATIVE,
                 KeyloggerBundle.message("settings.form.databaseURLRelative.checkbox")
             ) {
                 settingsService.state.databaseURLRelative
@@ -49,7 +49,7 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
         }
         section(KeyloggerBundle.message("settings.form.header.displaySettings")) {
             numberField(
-                SettingsFormFields.IDLE_TIMEOUT,
+                SettingsFormField.IDLE_TIMEOUT,
                 KeyloggerBundle.message("settings.form.idleTimeout.label")
             ) {
                 settingsService.state.idleTimeout
@@ -61,7 +61,7 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
             }
             gap()
             numberField(
-                SettingsFormFields.HISTORY_SIZE,
+                SettingsFormField.HISTORY_SIZE,
                 KeyloggerBundle.message("settings.form.historySize.label")
             ) {
                 settingsService.state.historySize
@@ -73,7 +73,7 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
         }
         section(KeyloggerBundle.message("settings.form.header.ideaVim")) {
             checkbox(
-                SettingsFormFields.IDEA_VIM,
+                SettingsFormField.IDEA_VIM,
                 KeyloggerBundle.message("settings.form.ideaVim.checkbox")
             ) {
                 settingsService.state.ideaVim
@@ -112,11 +112,11 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
      */
     override fun apply() {
         val formState = SettingsService.State(
-            databaseURL = form.model.get<String>(SettingsFormFields.DATABASE_URL).value,
-            databaseURLRelative = form.model.get<Boolean>(SettingsFormFields.DATABASE_URL_RELATIVE).value,
-            idleTimeout = form.model.get<Int>(SettingsFormFields.IDLE_TIMEOUT).value,
-            historySize = form.model.get<Int>(SettingsFormFields.HISTORY_SIZE).value,
-            ideaVim = form.model.get<Boolean>(SettingsFormFields.IDEA_VIM).value
+            databaseURL = form.model.get<String>(SettingsFormField.DATABASE_URL).value,
+            databaseURLRelative = form.model.get<Boolean>(SettingsFormField.DATABASE_URL_RELATIVE).value,
+            idleTimeout = form.model.get<Int>(SettingsFormField.IDLE_TIMEOUT).value,
+            historySize = form.model.get<Int>(SettingsFormField.HISTORY_SIZE).value,
+            ideaVim = form.model.get<Boolean>(SettingsFormField.IDEA_VIM).value
         )
         service<SettingsService>().update(formState)
     }
@@ -124,7 +124,7 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
     /**
      * @see [SearchableConfigurable.createComponent].
      */
-    override fun createComponent(): JComponent = form.layout.build()
+    override fun createComponent(): JComponent = form.layout.getPanel()
 
     /**
      * @see [SearchableConfigurable.isModified].
@@ -144,7 +144,7 @@ class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, 
     /**
      * @see [SearchableConfigurable.getPreferredFocusedComponent].
      */
-    override fun getPreferredFocusedComponent() = form.model.getComponent(SettingsFormFields.DATABASE_URL)
+    override fun getPreferredFocusedComponent() = form.model.getComponent(SettingsFormField.DATABASE_URL)
 
     /**
      * @see [Disposable.dispose].

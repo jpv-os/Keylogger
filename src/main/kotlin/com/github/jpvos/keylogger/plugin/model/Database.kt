@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger.core
+package com.github.jpvos.keylogger.plugin.model
 
 import java.io.File
 import java.nio.file.Path
@@ -6,7 +6,7 @@ import java.sql.Connection
 import java.sql.DriverManager.getConnection
 import java.sql.SQLException
 
-class DatabaseConnection(url: Path) {
+class Database(url: Path) {
 
     private val connection: Connection = connectToSQLiteFile(url)
 

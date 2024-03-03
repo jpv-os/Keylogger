@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger.plugin.util
+package com.github.jpvos.keylogger.plugin.util.forms
 
 class Form<T : Enum<T>>(val model: FormModel<T>, val layout: FormBuilder<T>) {
     companion object {

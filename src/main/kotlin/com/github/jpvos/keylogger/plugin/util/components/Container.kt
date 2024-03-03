@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger.plugin.util
+package com.github.jpvos.keylogger.plugin.util.components
 
 import com.intellij.ui.components.JBPanel
 import javax.swing.BoxLayout

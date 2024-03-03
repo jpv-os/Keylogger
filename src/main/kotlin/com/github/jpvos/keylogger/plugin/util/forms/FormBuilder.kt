@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger.plugin.util
+package com.github.jpvos.keylogger.plugin.util.forms
 
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.intellij.openapi.ui.DialogBuilder
@@ -12,6 +12,7 @@ import javax.swing.JPanel
 
 class FormBuilder<T : Enum<T>>(private val formModel: FormModel<T>) {
     private val fb = com.intellij.util.ui.FormBuilder()
+    private var sections = 0
 
     companion object {
         private const val SCALING = 16
@@ -91,8 +92,6 @@ class FormBuilder<T : Enum<T>>(private val formModel: FormModel<T>) {
         }
     }
 
-    private var sections = 0
-
     fun section(title: String, color: Color? = null, body: SectionBuilder<T>.() -> Unit): JBLabel {
         val titleLabel = JBLabel(title).apply {
             font = font.deriveFont(SCALING * 1.2f)
@@ -109,6 +108,6 @@ class FormBuilder<T : Enum<T>>(private val formModel: FormModel<T>) {
     }
 
     fun gap(): Unit = fb.run { addVerticalGap(SCALING) }
-    fun build(): JPanel = fb.panel
+    fun getPanel(): JPanel = fb.panel
 }
 

@@ -1,16 +1,16 @@
-package com.github.jpvos.keylogger.plugin.toolwindow.components
+package com.github.jpvos.keylogger.plugin.toolwindow.tabs
 
-import com.github.jpvos.keylogger.core.Action
-import com.github.jpvos.keylogger.core.Counter
-import com.github.jpvos.keylogger.core.DisplayFormat
+import com.github.jpvos.keylogger.plugin.model.Action
+import com.github.jpvos.keylogger.plugin.model.Counter
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.github.jpvos.keylogger.plugin.services.CounterService
-import com.github.jpvos.keylogger.plugin.util.Container
-import com.github.jpvos.keylogger.plugin.util.Table
+import com.github.jpvos.keylogger.plugin.util.components.Container
+import com.github.jpvos.keylogger.plugin.util.components.Table
+import com.github.jpvos.keylogger.plugin.util.components.TableCell
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 
-class ActionCounterComponent : Container(), Counter.Listener, Disposable {
+class ActionCounterTab : Container(), Counter.Listener, Disposable {
 
     private val table = Table(
         arrayOf(
@@ -43,10 +43,10 @@ class ActionCounterComponent : Container(), Counter.Listener, Disposable {
                 .sortedByDescending { it.second }
                 .map {
                     arrayOf(
-                        it.first.type.toString(),
-                        it.first.name,
-                        DisplayFormat.long(it.second),
-                        DisplayFormat.percent01(it.second.toDouble() / state.totalActions.toDouble())
+                        TableCell.Label(it.first.type.toString()),
+                        TableCell.Label(it.first.name),
+                        TableCell.Long(it.second),
+                        TableCell.Percent(it.second.toDouble() / state.totalActions.toDouble() * 100.0)
                     )
                 }
                 .toTypedArray()

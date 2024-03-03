@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger.plugin.util
+package com.github.jpvos.keylogger.plugin.util.forms
 
 import com.intellij.ide.ui.UINumericRange
 import com.intellij.ui.JBIntSpinner

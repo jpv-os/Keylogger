@@ -1,6 +1,6 @@
 package com.github.jpvos.keylogger.plugin.services
 
-import com.github.jpvos.keylogger.core.DatabaseConnection
+import com.github.jpvos.keylogger.plugin.model.Database
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
@@ -17,7 +17,7 @@ class DatabaseService : Disposable {
     /**
      * The database connection, ready to be used by the rest of the application.
      */
-    var connection: DatabaseConnection = DatabaseConnection(service<SettingsService>().getDatabaseFilePath())
+    var connection: Database = Database(service<SettingsService>().getDatabaseFilePath())
         private set
 
     init {
@@ -36,7 +36,7 @@ class DatabaseService : Disposable {
      */
     fun restoreDatabase() {
         connection.close()
-        connection = DatabaseConnection(service<SettingsService>().getDatabaseFilePath())
+        connection = Database(service<SettingsService>().getDatabaseFilePath())
     }
 
 

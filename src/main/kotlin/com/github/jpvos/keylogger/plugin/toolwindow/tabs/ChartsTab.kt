@@ -1,7 +1,7 @@
-package com.github.jpvos.keylogger.plugin.toolwindow.components
+package com.github.jpvos.keylogger.plugin.toolwindow.tabs
 
-import com.github.jpvos.keylogger.core.Action
-import com.github.jpvos.keylogger.core.Counter
+import com.github.jpvos.keylogger.plugin.model.Action
+import com.github.jpvos.keylogger.plugin.model.Counter
 import com.github.jpvos.keylogger.plugin.services.CounterService
 import com.github.jpvos.keylogger.plugin.services.DatabaseService
 import com.intellij.openapi.Disposable
@@ -14,7 +14,7 @@ import org.knowm.xchart.XChartPanel
 import org.knowm.xchart.style.PieStyler
 
 
-class ChartsComponent :  JBPanel<JBPanel<*>>(), Counter.Listener, Disposable {
+class ChartsTab :  JBPanel<JBPanel<*>>(), Counter.Listener, Disposable {
     private val actions = service<DatabaseService>().connection.queryActionHistogram().toMutableMap()
     private val pieChart: PieChart = PieChartBuilder()
         .title("Actions")

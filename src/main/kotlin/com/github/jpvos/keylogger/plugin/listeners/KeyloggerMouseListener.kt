@@ -1,6 +1,7 @@
 package com.github.jpvos.keylogger.plugin.listeners
 
-import com.github.jpvos.keylogger.core.Action
+import com.github.jpvos.keylogger.plugin.KeyloggerBundle
+import com.github.jpvos.keylogger.plugin.model.Action
 import com.github.jpvos.keylogger.plugin.services.CounterService
 import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.event.EditorMouseEvent
@@ -13,9 +14,9 @@ internal class KeyloggerMouseListener : EditorMouseListener {
             Action(
                 Action.Type.Mouse,
                 when (event.mouseEvent.button) {
-                    1 -> "Left Click"
-                    2 -> "Middle Click"
-                    3 -> "Right Click"
+                    1 -> KeyloggerBundle.message("action.mouse.left")
+                    2 -> KeyloggerBundle.message("action.mouse.middle")
+                    3 -> KeyloggerBundle.message("action.mouse.right")
                     else -> event.mouseEvent.button.toString()
                 }
             )

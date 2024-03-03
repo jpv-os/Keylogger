@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger.core
+package com.github.jpvos.keylogger.plugin.model
 
 
 class Counter(

@@ -1,4 +1,4 @@
-package com.github.jpvos.keylogger.plugin.util
+package com.github.jpvos.keylogger.plugin.util.forms
 
 class FormModel<T : Enum<T>> {
 

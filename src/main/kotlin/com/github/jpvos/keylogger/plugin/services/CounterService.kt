@@ -1,7 +1,7 @@
 package com.github.jpvos.keylogger.plugin.services
 
-import com.github.jpvos.keylogger.core.Action
-import com.github.jpvos.keylogger.core.Counter
+import com.github.jpvos.keylogger.plugin.model.Action
+import com.github.jpvos.keylogger.plugin.model.Counter
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
