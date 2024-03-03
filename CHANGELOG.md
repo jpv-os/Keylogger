@@ -4,8 +4,16 @@
 
 ## [Unreleased]
 
+## [0.4.0] - 2024-03-03
+
+### Added
+
+- Custom cell renderers for tool window tables
+- Settings page screenshot
+
 ### Changed
 
+- Updated README with more details and roadmap
 - Code cleanup, added documentation
 
 ## [0.3.1] - 2024-02-29
@@ -20,7 +28,8 @@
 
 - Breaking change: settings now uses a different persistence key, so the previous settings will be lost.
 - Greatly improved the plugin settings page
-- Added a new setting for using database file paths relative to the default home directory for better interop with Settings Sync
+- Added a new setting for using database file paths relative to the default home directory for better interop with
+  Settings Sync
 - Optimize plugin description length for the JetBrains Marketplace layout
 
 ## [0.2.1] - 2024-02-24
@@ -34,7 +43,8 @@
 ### Added
 
 - Action history tab in tool window
-- IdeaVim compatibility mode: in INSERT mode, backspace emits two events, the regular backspace event and the custom IdeaVim event "Shortcuts", which is ignored if the plugin is in IdeaVim compatibility mode.
+- IdeaVim compatibility mode: in INSERT mode, backspace emits two events, the regular backspace event and the custom
+  IdeaVim event "Shortcuts", which is ignored if the plugin is in IdeaVim compatibility mode.
 - Custom plugin and toolwindow icons
 
 ### Changed
@@ -69,7 +79,10 @@
 - Make database URL and idle timeout configurable via plugin settings
 - Add a simple settings page to configure database URL and idle timeout
 
-[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.3.1...HEAD
+--- 
+
+[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/jpv-os/Keylogger/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/jpv-os/Keylogger/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/jpv-os/Keylogger/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/jpv-os/Keylogger/compare/v0.2.0...v0.2.1

@@ -20,6 +20,8 @@
 
 ![Screenshot 2](https://raw.githubusercontent.com/jpv-os/Keylogger/main/assets/screenshot2.png)
 
+![Screenshot 3](https://raw.githubusercontent.com/jpv-os/Keylogger/main/assets/screenshot3.png)
+
 </div>
 
 
@@ -67,12 +69,12 @@ This plugin is still in its early stages. The following roadmap is a rough outli
 - [ ] General improvements 
     - [x] History of actions
     - [x] Restore default settings button, delete database button in settings page
-    - [ ] Improve UI by implementing custom cell renderers etc. for tables
+    - [x] Improve UI by implementing custom cell renderers etc. for tables
     - [x] Database schema validation on startup
     - [ ] Improve error handling, make critical features more robust (what happens if database file is deleted while running, ...)
 - [ ] Code Quality
     - [ ] Code fully documented 
-    - [ ] Logging for critical features (DB connection) to make error reporting easier
+    - [ ] Logging for critical features (DB connection) to make error reporting easier for users
     - [ ] Write meaningful tests (Unit tests, UI tests, ...?)
 - [ ] Future feature ideas
     - [ ] Welcome Dialog / First Run Wizard
