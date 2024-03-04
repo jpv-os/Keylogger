@@ -7,7 +7,15 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.editor.event.EditorMouseEvent
 import com.intellij.openapi.editor.event.EditorMouseListener
 
+/**
+ * This class listens to mouse events in the editor.
+ * It forwards the mouse events to the [CounterService].
+ */
 internal class KeyloggerMouseListener : EditorMouseListener {
+    /**
+     * This method is called after a mouse button has been pressed.
+     * It forwards the mouse button to the [CounterService].
+     */
     override fun mousePressed(event: EditorMouseEvent) {
         super.mousePressed(event)
         service<CounterService>().counter.next(

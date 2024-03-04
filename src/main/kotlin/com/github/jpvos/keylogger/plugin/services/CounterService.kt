@@ -14,7 +14,7 @@ import com.intellij.openapi.components.service
  * - listening to the counter and persisting actions to the database
  */
 @Service
-class CounterService : Counter.Listener, Disposable {
+internal class CounterService : Counter.Listener, Disposable {
     /**
      * The action counter.
      */

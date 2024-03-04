@@ -12,7 +12,7 @@ import com.intellij.openapi.components.service
  * - can be restored (= closed and reopened) at any time, for example when the database file changes
  */
 @Service
-class DatabaseService : Disposable {
+internal class DatabaseService : Disposable {
 
     /**
      * The database connection, ready to be used by the rest of the application.

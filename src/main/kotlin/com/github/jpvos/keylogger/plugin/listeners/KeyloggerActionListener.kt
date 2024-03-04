@@ -10,7 +10,15 @@ import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.openapi.actionSystem.ex.AnActionListener
 import com.intellij.openapi.components.service
 
+/**
+ * This class listens to actions and keystrokes in the IDE.
+ * It forwards the actions and keystrokes to the [CounterService].
+ */
 internal class KeyloggerActionListener : AnActionListener {
+    /**
+     * This method is called after an action has been performed.
+     * It forwards the action to the [CounterService].
+     */
     override fun afterActionPerformed(action: AnAction, event: AnActionEvent, result: AnActionResult) {
         super.afterActionPerformed(action, event, result)
         val actionName = action.templatePresentation.text?.toString() ?: run {
@@ -29,6 +37,10 @@ internal class KeyloggerActionListener : AnActionListener {
         )
     }
 
+    /**
+     * This method is called after a keystroke has been performed.
+     * It forwards the keystroke to the [CounterService].
+     */
     override fun afterEditorTyping(c: Char, dataContext: DataContext) {
         super.afterEditorTyping(c, dataContext)
         service<CounterService>().counter.next(

@@ -9,7 +9,10 @@ import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.ui.JBColor
 import javax.swing.JComponent
 
-class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, Disposable {
+/**
+ * The configurable for the Keylogger plugin.
+ */
+internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.Listener, Disposable {
 
     /**
      * The fields of the settings form.

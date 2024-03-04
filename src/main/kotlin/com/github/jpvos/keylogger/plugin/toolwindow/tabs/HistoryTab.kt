@@ -12,7 +12,7 @@ import com.github.jpvos.keylogger.plugin.util.components.TableCell
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 
-class HistoryTab : Container(), Counter.Listener, Disposable {
+internal class HistoryTab : Container(), Counter.Listener, Disposable {
     private val table = Table(
         arrayOf(
             KeyloggerBundle.message("history.table.type"),

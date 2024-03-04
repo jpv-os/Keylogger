@@ -2,6 +2,7 @@ package com.github.jpvos.keylogger.plugin.toolwindow
 
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
 import com.github.jpvos.keylogger.plugin.toolwindow.tabs.ActionCounterTab
+import com.github.jpvos.keylogger.plugin.toolwindow.tabs.ChartsTab
 import com.github.jpvos.keylogger.plugin.toolwindow.tabs.HistoryTab
 import com.github.jpvos.keylogger.plugin.toolwindow.tabs.OverviewTab
 import com.intellij.openapi.project.Project
@@ -10,7 +11,7 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.content.ContentFactory
 import javax.swing.JComponent
 
-class KeyloggerToolWindowFactory : ToolWindowFactory {
+internal class KeyloggerToolWindowFactory : ToolWindowFactory {
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         fun addTab(title: String, component: JComponent?) {
@@ -20,8 +21,7 @@ class KeyloggerToolWindowFactory : ToolWindowFactory {
         addTab(KeyloggerBundle.message("toolWindow.overview"), OverviewTab())
         addTab(KeyloggerBundle.message("toolWindow.actionCounter"), ActionCounterTab())
         addTab(KeyloggerBundle.message("toolWindow.history"), HistoryTab())
-        // TODO enable this tab
-        // addTab(KeyloggerBundle.message("toolWindow.charts"), ChartsComponent())
+        addTab(KeyloggerBundle.message("toolWindow.charts"), ChartsTab())
     }
 
     override fun shouldBeAvailable(project: Project) = true

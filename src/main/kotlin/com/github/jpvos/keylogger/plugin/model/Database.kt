@@ -6,7 +6,12 @@ import java.sql.Connection
 import java.sql.DriverManager.getConnection
 import java.sql.SQLException
 
+/**
+ * A database that stores the actions that the user has performed.
+ */
 class Database(url: Path) {
+
+    // TODO: refactor names so that usage of path/url/file is consistent
 
     private val connection: Connection = connectToSQLiteFile(url)
 

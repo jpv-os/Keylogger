@@ -6,20 +6,24 @@ import com.github.jpvos.keylogger.plugin.services.CounterService
 import com.github.jpvos.keylogger.plugin.services.DatabaseService
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
+import com.intellij.ui.JBColor
 import com.intellij.ui.components.JBPanel
 import com.intellij.ui.components.JBScrollPane
 import org.knowm.xchart.PieChart
 import org.knowm.xchart.PieChartBuilder
 import org.knowm.xchart.XChartPanel
+import org.knowm.xchart.internal.ChartBuilder
 import org.knowm.xchart.style.PieStyler
+import org.knowm.xchart.style.Styler
 
 
-class ChartsTab :  JBPanel<JBPanel<*>>(), Counter.Listener, Disposable {
+internal class ChartsTab :  JBPanel<JBPanel<*>>(), Counter.Listener, Disposable {
     private val actions = service<DatabaseService>().connection.queryActionHistogram().toMutableMap()
     private val pieChart: PieChart = PieChartBuilder()
         .title("Actions")
-        .width(800)
+        .width(600)
         .height(600)
+        .theme(Styler.ChartTheme.XChart)
         .build()
         .apply {
             styler.apply {

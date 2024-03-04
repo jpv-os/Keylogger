@@ -81,6 +81,10 @@ class FormBuilder<T : Enum<T>>(private val formModel: FormModel<T>) {
             return input(field, label)
         }
 
+        fun pathField() {
+            // TODO https://plugins.jetbrains.com/docs/intellij/file-and-class-choosers.html#via-textfield
+        }
+
         fun numberField(field: T, label: String? = null, getDefaultValue: () -> Int): JComponent {
             formModel.addInteger(field, getDefaultValue)
             return input(field, label)

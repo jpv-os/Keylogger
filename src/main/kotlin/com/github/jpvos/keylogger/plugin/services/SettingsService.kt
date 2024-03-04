@@ -20,7 +20,7 @@ import kotlin.io.path.Path
     name = "com.github.jpvos.keylogger.plugin.services.SettingsService",
     storages = [Storage("KeyloggerSettings.xml")]
 )
-class SettingsService : PersistentStateComponent<SettingsService.State> {
+internal class SettingsService : PersistentStateComponent<SettingsService.State> {
     /**
      * Internal representation of the currently active settings.
      */
@@ -74,6 +74,7 @@ class SettingsService : PersistentStateComponent<SettingsService.State> {
      * Companion object to store the default values of the settings.
      */
     companion object {
+        // TODO: alles rund um URL refactoren und ordentlich benennen. path statt url!
         /**
          * @see [SettingsService.databaseURL].
          */

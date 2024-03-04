@@ -24,7 +24,6 @@
 
 </div>
 
-
 ## Installation
 
 - Using the IDE built-in plugin system:
@@ -77,6 +76,7 @@ This plugin is still in its early stages. The following roadmap is a rough outli
     - [ ] Logging for critical features (DB connection) to make error reporting easier for users
     - [ ] Write meaningful tests (Unit tests, UI tests, ...?)
 - [ ] Future feature ideas
+    - [ ] Encrypted database file (configurable via settings)
     - [ ] Welcome Dialog / First Run Wizard
     - [ ] Notifications (e.g. "Database successfully deleted", "1 million actions reached" etc.)
     - [ ] Configurable Action ignore list (currently, the IdeaVim compatibility mode ignoes the "Shortcuts" action - why not let the user create an ignore list?)

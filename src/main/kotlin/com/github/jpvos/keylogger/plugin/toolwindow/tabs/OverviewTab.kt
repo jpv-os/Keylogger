@@ -10,7 +10,7 @@ import com.github.jpvos.keylogger.plugin.util.components.TableCell
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 
-class OverviewTab : Container(), Counter.Listener, Disposable {
+internal class OverviewTab : Container(), Counter.Listener, Disposable {
 
     private val table = Table(
         arrayOf(
