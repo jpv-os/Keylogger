@@ -10,6 +10,7 @@ import com.github.jpvos.keylogger.plugin.util.components.TableCell
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.service
 
+// TODO after cleaning IdeaVim actions, this component does not update
 internal class ActionCounterTab : Container(), Counter.Listener, Disposable {
 
     private val table = Table(

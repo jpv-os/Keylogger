@@ -3,6 +3,7 @@ package com.github.jpvos.keylogger.plugin.model
 import java.io.File
 import java.nio.file.Path
 import java.sql.Connection
+import java.sql.Date
 import java.sql.DriverManager.getConnection
 import java.sql.SQLException
 
@@ -85,6 +86,99 @@ class Database(url: Path) {
                     map[Action(type, name)] = count
                 }
                 return map
+            }
+    }
+
+    fun queryActionsByDayAndTime(timeIntervalHours: Int): List<Triple<Int, Int, Long>> {
+        require(timeIntervalHours in 1..24)
+        connection
+            .prepareStatement(
+                """
+                    SELECT
+                        strftime('%w', datetime(timestamp / 1000, 'unixepoch')) AS day_of_week,
+                        CAST(strftime('%H', datetime(timestamp / 1000, 'unixepoch')) AS INTEGER) / ? AS time_interval,
+                        COUNT(*) AS number_of_actions
+                    FROM
+                        actions
+                    GROUP BY
+                        day_of_week,
+                        time_interval
+                    ORDER BY
+                        day_of_week,
+                        time_interval
+            """
+            ).apply {
+                setInt(1, timeIntervalHours)
+            }
+            .executeQuery()
+            .apply {
+                val result = mutableListOf<Triple<Int, Int, Long>>()
+                while (next()) {
+                    val dayOfWeek = getInt("day_of_week")
+                    val timeInterval = getInt("time_interval")
+                    val numberOfActions = getLong("number_of_actions")
+                    result.add(Triple(dayOfWeek, timeInterval, numberOfActions))
+                }
+                return result
+            }
+    }
+
+    fun queryActivityPerDayAndType(): List<Triple<Date, String, Long>> {
+        connection
+            .createStatement()
+            .executeQuery(
+                """
+                    SELECT 
+                        date(timestamp / 1000, 'unixepoch') AS day, 
+                        type,
+                        COUNT(*) AS number_of_actions 
+                    FROM 
+                        actions 
+                    GROUP BY 
+                        day, 
+                        type
+                    ORDER BY 
+                        day
+                    """
+            )
+            .apply {
+                val result = mutableListOf<Triple<Date, String, Long>>()
+                while (next()) {
+                    val dayString = getString("day")
+                    val day = Date.valueOf(dayString)
+                    val type = getString("type")
+                    val numberOfActions = getLong("number_of_actions")
+                    result.add(Triple(day, type, numberOfActions))
+                }
+                return result
+            }
+    }
+
+    fun queryActivityPerDay(): List<Pair<Date, Long>> {
+        connection
+            .createStatement()
+            .executeQuery(
+                """
+                    SELECT 
+                        date(timestamp / 1000, 'unixepoch') AS day, 
+                        COUNT(*) AS number_of_actions 
+                    FROM 
+                        actions 
+                    GROUP BY 
+                        day
+                    ORDER BY 
+                        day
+                    """
+            )
+            .apply {
+                val result = mutableListOf<Pair<Date, Long>>()
+                while (next()) {
+                    val dayString = getString("day")
+                    val day = Date.valueOf(dayString)
+                    val numberOfActions = getLong("number_of_actions")
+                    result.add(day to numberOfActions)
+                }
+                return result
             }
     }
 
