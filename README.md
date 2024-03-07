@@ -36,60 +36,39 @@
   Download the [latest release](https://github.com/jpv-os/Keylogger/releases/latest) and install it manually using
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
+## Getting Started
+
+- **Customize Keylogger** in the IDE Settings under `Settings > Tools > Keylogger`
+- **Look at your statistics** in the Keylogger Tool Window under `View > Tool Windows > Keylogger`
+- **Access the raw data** on your machine using `sqlite3`
+- Visit the [plugin page on GitHub](https://github.com/jpv-os/Keylogger) for more information, to report bugs and to suggest features
+- Consider leaving a review on the [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/23746-keylogger) if you enjoy Keylogger
+
 ## Development Roadmap
 
-This plugin is still in its early stages. The following roadmap is a rough outline of the next steps:
+This plugin is still in early development. All versions below 1.0.0 are considered unstable. 
 
-- [x] Start with template project
-    - [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-    - [x] Get familiar with the [template documentation][template].
-    - [x] Adjust the [pluginGroup](./gradle.properties), [plugin ID](./src/main/resources/META-INF/plugin.xml)
-      and [sources package](./src/main/kotlin).
-    - [x] Adjust the plugin description in `README` (see [Tips][docs:plugin-description])
-    - [x] Review
-      the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-    - [x] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate)
-      for the first time.
-    - [x] Set the `PLUGIN_ID` in the above README badges.
-    - [x] Set
-      the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate)
-      related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-    - [x] Set
-      the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-    - [x] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be
-      notified about releases containing new features and fixes.
-- [x] Prototype
-    - [x] Action/click/type listeners
-    - [x] Create a simple tool window
-    - [x] First (hidden) release
-- [x] Minimum viable plugin
-    - [x] Persist data
-    - [x] Make things like idle timeout configurable via plugin settings
-- [ ] General improvements 
-    - [x] History of actions
-    - [x] Restore default settings button, delete database button in settings page
-    - [x] Improve UI by implementing custom cell renderers etc. for tables
-    - [x] Database schema validation on startup
-    - [ ] Improve error handling, make critical features more robust (what happens if database file is deleted while running, ...)
-- [ ] Code Quality
-    - [ ] Code fully documented 
-    - [ ] Logging for critical features (DB connection) to make error reporting easier for users
-    - [ ] Write meaningful tests (Unit tests, UI tests, ...?)
-- [ ] Future feature ideas
-    - [ ] Encrypted database file (configurable via settings)
-    - [ ] Welcome Dialog / First Run Wizard
-    - [ ] Notifications (e.g. "Database successfully deleted", "1 million actions reached" etc.)
-    - [ ] Configurable Action ignore list (currently, the IdeaVim compatibility mode ignoes the "Shortcuts" action - why not let the user create an ignore list?)
-    - [ ] Store actions database in plugin settings instead of file, so that it works with settings sync (allowed maximum size?)
-    - [ ] Charts and visualizations in tool window
-    - [ ] IDE status bar widget that shows the current APM (or other statistics)
-    - [ ] IDE progress bar that shows the idle timeout
-    - [ ] Persistent state component for customizable toolwindow layout
-    - [ ] How many meters scrolled
 - [ ] Version 1.0.0
-    - [ ] Demo video (must be hosted on YouTube)
+    - [ ] Improve error handling, make critical features more robust (what happens if database file is deleted while
+    running, ...)
+    - [ ] Logging for critical features (DB connection) to make error reporting easier for users
     - [ ] Comprehensive usage guide (also as YouTube video?)
+    - [ ] Code fully documented
+    - [ ] Demo video (must be hosted on YouTube)
     - [ ] Issue/Feature request templates
+- [ ] Feature ideas
+  - [ ] Write meaningful tests (Unit tests, UI tests, ...?)
+  - [ ] Welcome Dialog / First Run Wizard
+  - [ ] Notifications (e.g. "Database successfully deleted", "1 million actions reached" etc.)
+  - [ ] Configurable Action ignore list (currently, the IdeaVim compatibility mode ignoes the "Shortcuts" action - why
+    not let the user create an ignore list?)
+  - [ ] Database storage
+    - [ ] Store actions database in plugin settings instead of file, so that it works with settings sync (allowed maximum size?)
+    - [ ] Encrypted database file (configurable via settings)
+  - [ ] IDE status bar widget that shows the current APM (or other statistics)
+  - [ ] IDE progress bar that shows the idle timeout
+  - [ ] Persistent state component for customizable toolwindow layout
+  - [ ] Scroll Listeners, and "How many meters scrolled" statistic
 
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].

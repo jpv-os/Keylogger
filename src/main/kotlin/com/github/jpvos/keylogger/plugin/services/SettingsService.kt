@@ -131,8 +131,6 @@ internal class SettingsService : PersistentStateComponent<SettingsService.State>
 
     /**
      * Get the path to the database file from the user settings.
-     * @see [SettingsService.databaseURL]
-     * @see [SettingsService.databaseURLRelative]
      */
     fun getDatabaseFilePath(): Path {
         val segments = state.databaseURL.split("/").toTypedArray()

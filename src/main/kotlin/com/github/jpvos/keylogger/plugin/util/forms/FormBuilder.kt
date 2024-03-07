@@ -93,6 +93,7 @@ class FormBuilder<T : Enum<T>>(private val formModel: FormModel<T>) {
             return input(field, label)
         }
 
+        @Suppress("unused")
         fun numberPairField(
             firstField: T,
             secondField: T,

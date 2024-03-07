@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.5.0] - 2024-03-07
+
+### Added
+
+- Tool window tab with charts
+
 ## [0.4.0] - 2024-03-03
 
 ### Added
@@ -79,7 +85,8 @@
 - Make database URL and idle timeout configurable via plugin settings
 - Add a simple settings page to configure database URL and idle timeout
 
-[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/jpv-os/Keylogger/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/jpv-os/Keylogger/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/jpv-os/Keylogger/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/jpv-os/Keylogger/compare/v0.2.1...v0.3.0
