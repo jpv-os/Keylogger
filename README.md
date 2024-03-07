@@ -55,7 +55,6 @@ This plugin is still in early development. All versions below 1.0.0 are consider
     - [ ] Comprehensive usage guide (also as YouTube video?)
     - [ ] Code fully documented
     - [ ] Demo video (must be hosted on YouTube)
-    - [ ] Issue/Feature request templates
 - [ ] Feature ideas
   - [ ] Write meaningful tests (Unit tests, UI tests, ...?)
   - [ ] Welcome Dialog / First Run Wizard
