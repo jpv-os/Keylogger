@@ -98,24 +98,21 @@ class Counter(
     private val listeners = mutableListOf<Listener>()
 
     /**
-     * Set the state of the counter.
+     * The current state of the counter.
      */
-    fun setState(state: State) {
-        actions.clear()
-        actions.putAll(state.actions)
-        activeTime = state.activeTime
-        idleTime = state.idleTime
-        lastActionTime = null
-        lastUpdateTime = System.currentTimeMillis()
-    }
-
-    /**
-     * Get the state of the counter.
-     */
-    fun getState(): State {
-        accumulateTime()
-        return State(actions, activeTime, idleTime)
-    }
+    var state: State
+        get() {
+            accumulateTime()
+            return State(actions, activeTime, idleTime)
+        }
+        set(state) {
+            actions.clear()
+            actions.putAll(state.actions)
+            activeTime = state.activeTime
+            idleTime = state.idleTime
+            lastActionTime = null
+            lastUpdateTime = System.currentTimeMillis()
+        }
 
     /**
      * Perform an action.

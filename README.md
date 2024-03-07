@@ -85,6 +85,7 @@ This plugin is still in its early stages. The following roadmap is a rough outli
     - [ ] IDE status bar widget that shows the current APM (or other statistics)
     - [ ] IDE progress bar that shows the idle timeout
     - [ ] Persistent state component for customizable toolwindow layout
+    - [ ] How many meters scrolled
 - [ ] Version 1.0.0
     - [ ] Demo video (must be hosted on YouTube)
     - [ ] Comprehensive usage guide (also as YouTube video?)

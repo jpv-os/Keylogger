@@ -1,6 +1,9 @@
 package com.github.jpvos.keylogger.plugin.util.forms
 
 import com.intellij.ide.ui.UINumericRange
+import com.intellij.openapi.fileChooser.FileChooserDescriptor
+import com.intellij.openapi.ui.TextBrowseFolderListener
+import com.intellij.openapi.ui.TextFieldWithBrowseButton
 import com.intellij.ui.JBIntSpinner
 import com.intellij.ui.components.JBCheckBox
 import com.intellij.ui.components.JBTextField
@@ -20,6 +23,19 @@ sealed class FormControl<T>(val getPristineValue: () -> T) {
         override val component = JBTextField()
         override var value: String
             get() = component.text ?: ""
+            set(value) {
+                component.text = value
+            }
+    }
+
+    class Path(getPristineValue: () -> String) : FormControl<String>(getPristineValue) {
+        override val component = TextFieldWithBrowseButton().apply {
+            val fileChooserDescriptor = FileChooserDescriptor(true, false, false, false, false, false)
+            val textBrowseFolderListener = TextBrowseFolderListener(fileChooserDescriptor)
+            this.addBrowseFolderListener(textBrowseFolderListener)
+        }
+        override var value: String
+            get() = component.text
             set(value) {
                 component.text = value
             }

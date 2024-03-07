@@ -10,8 +10,12 @@ class FormModel<T : Enum<T>> {
         formControls.values.forEach { it.reset() }
     }
 
+    @Suppress("unused")
     fun addText(field: T, getDefaultValue: () -> String) =
         FormControl.Text(getDefaultValue).also { add(field, it) }
+
+    fun addPath(field: T, getDefaultValue: () -> String) =
+        FormControl.Path(getDefaultValue).also { add(field, it) }
 
     fun addInteger(field: T, getDefaultValue: () -> Int) =
         FormControl.Integer(getDefaultValue).also { add(field, it) }

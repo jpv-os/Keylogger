@@ -10,11 +10,9 @@ import java.sql.SQLException
 /**
  * A database that stores the actions that the user has performed.
  */
-class Database(url: Path) {
+class Database(path: Path) {
 
-    // TODO: refactor names so that usage of path/url/file is consistent
-
-    private val connection: Connection = connectToSQLiteFile(url)
+    private val connection: Connection = connectToSQLiteFile(path)
 
     companion object {
         private fun connectToSQLiteFile(path: Path): Connection {
@@ -56,10 +54,10 @@ class Database(url: Path) {
         }
     }
 
-    fun queryActionHistory(size: Long): List<Pair<Action, Long>> {
+    fun queryActionHistory(size: Int): List<Pair<Action, Long>> {
         connection
             .prepareStatement("SELECT type, name, timestamp FROM actions ORDER BY timestamp DESC LIMIT ?")
-            .apply { setLong(1, size) }
+            .apply { setInt(1, size) }
             .executeQuery()
             .apply {
                 val list = mutableListOf<Pair<Action, Long>>()
@@ -73,7 +71,7 @@ class Database(url: Path) {
             }
     }
 
-    fun queryActionHistogram(): Map<Action, Long> {
+    fun queryActionMap(): Map<Action, Long> {
         connection
             .createStatement()
             .executeQuery("SELECT type, name, count(*) as count FROM actions GROUP BY type, name")
@@ -89,7 +87,7 @@ class Database(url: Path) {
             }
     }
 
-    fun queryActionsByDayAndTime(timeIntervalHours: Int): List<Triple<Int, Int, Long>> {
+    fun queryActionsByWeekdayAndTime(timeIntervalHours: Int): List<Triple<Int, Int, Long>> {
         require(timeIntervalHours in 1..24)
         connection
             .prepareStatement(

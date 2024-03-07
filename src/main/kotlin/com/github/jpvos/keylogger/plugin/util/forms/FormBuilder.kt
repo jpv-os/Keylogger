@@ -76,18 +76,48 @@ class FormBuilder<T : Enum<T>>(private val formModel: FormModel<T>) {
             return component
         }
 
+        @Suppress("unused")
         fun textField(field: T, label: String? = null, getDefaultValue: () -> String): JComponent {
             formModel.addText(field, getDefaultValue)
             return input(field, label)
         }
 
-        fun pathField() {
-            // TODO https://plugins.jetbrains.com/docs/intellij/file-and-class-choosers.html#via-textfield
+        @Suppress("unused")
+        fun pathField(field: T, label: String? = null, getDefaultValue: () -> String): JComponent {
+            formModel.addPath(field, getDefaultValue)
+            return input(field, label)
         }
 
         fun numberField(field: T, label: String? = null, getDefaultValue: () -> Int): JComponent {
             formModel.addInteger(field, getDefaultValue)
             return input(field, label)
+        }
+
+        fun numberPairField(
+            firstField: T,
+            secondField: T,
+            separator: String,
+            label: String? = null,
+            getDefaultValue: () -> Pair<Int, Int>
+        ): JComponent {
+            val firstCtrl = formModel.addInteger(firstField) {
+                getDefaultValue().first
+            }
+            val secondCtrl = formModel.addInteger(secondField) {
+                getDefaultValue().second
+            }
+            val container = JPanel().apply {
+                layout = com.intellij.ui.components.panels.HorizontalLayout(0)
+                add(firstCtrl.component)
+                add(JBLabel(separator))
+                add(secondCtrl.component)
+            }
+            if (label != null) {
+                fb.addLabeledComponent(JBLabel(label), container, SCALING, true)
+            } else {
+                fb.addComponent(container, SCALING)
+            }
+            return container
         }
 
         fun checkbox(field: T, label: String, getDefaultValue: () -> Boolean): JComponent {

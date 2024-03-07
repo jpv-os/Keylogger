@@ -31,7 +31,7 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
     private val form = Form.create<SettingsFormField> {
         val settingsService = service<SettingsService>()
         section(KeyloggerBundle.message("settings.form.header.actionDatabase")) {
-            textField(
+            pathField(
                 SettingsFormField.DATABASE_URL,
                 KeyloggerBundle.message("settings.form.databaseURL.label")
             ) {
@@ -49,8 +49,7 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
                 hint(KeyloggerBundle.message("settings.form.databaseURLRelative.hint"))
                 example(KeyloggerBundle.message("settings.form.databaseURLRelative.example"))
             }
-        }
-        section(KeyloggerBundle.message("settings.form.header.displaySettings")) {
+            gap()
             numberField(
                 SettingsFormField.IDLE_TIMEOUT,
                 KeyloggerBundle.message("settings.form.idleTimeout.label")
@@ -62,7 +61,8 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
                 note(KeyloggerBundle.message("settings.form.idleTimeout.note"))
                 hint(KeyloggerBundle.message("settings.form.idleTimeout.hint"))
             }
-            gap()
+        }
+        section(KeyloggerBundle.message("settings.form.header.toolWindow")) {
             numberField(
                 SettingsFormField.HISTORY_SIZE,
                 KeyloggerBundle.message("settings.form.historySize.label")
@@ -119,7 +119,7 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
             databaseURLRelative = form.model.get<Boolean>(SettingsFormField.DATABASE_URL_RELATIVE).value,
             idleTimeout = form.model.get<Int>(SettingsFormField.IDLE_TIMEOUT).value,
             historySize = form.model.get<Int>(SettingsFormField.HISTORY_SIZE).value,
-            ideaVim = form.model.get<Boolean>(SettingsFormField.IDEA_VIM).value
+            ideaVim = form.model.get<Boolean>(SettingsFormField.IDEA_VIM).value,
         )
         service<SettingsService>().update(formState)
     }

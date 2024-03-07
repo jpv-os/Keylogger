@@ -48,12 +48,12 @@ internal class CounterService : Counter.Listener, Disposable {
         // read the actions and active/idle time from the database
         val databaseService = service<DatabaseService>()
         val idleTimeout = service<SettingsService>().state.idleTimeout.toLong()
-        val actions = databaseService.connection.queryActionHistogram()
+        val actions = databaseService.connection.queryActionMap()
         val (activeTime, idleTime) = databaseService.connection.queryActiveAndIdleTime(idleTimeout)
 
         // restore the counter
         counter.setIdleTimeout(idleTimeout)
-        counter.setState(Counter.State(actions, activeTime, idleTime))
+        counter.state = Counter.State(actions, activeTime, idleTime)
 
         // re-register this service as a listener after restoring the counter
         counter.registerListener(this)

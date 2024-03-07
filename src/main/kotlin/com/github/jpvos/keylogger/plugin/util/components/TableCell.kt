@@ -53,13 +53,17 @@ sealed class TableCell {
             val milliseconds = value % 1000
             val strBuilder = mutableListOf<String>()
             strBuilder.add("${milliseconds.toString().padStart(3, '0')}ms")
-            if (seconds > 0) strBuilder.add("${seconds.toString().padStart(2, '0')}s")
-            if (minutes > 0) strBuilder.add("${minutes.toString().padStart(2, '0')}m")
-            if (hours > 0) strBuilder.add("${hours.toString().padStart(2, '0')}h")
-            if (days > 0) strBuilder.add("${days.toString().padStart(2, '0')}d")
-            if (weeks > 0) strBuilder.add("${weeks.toString().padStart(2, '0')}w")
-            if (months > 0) strBuilder.add("${months.toString().padStart(2, '0')}m")
-            if (years > 0) strBuilder.add("${years}y")
+            strBuilder.add("${seconds.toString().padStart(2, '0')}s")
+            strBuilder.add("${minutes.toString().padStart(2, '0')}m")
+            strBuilder.add("${hours.toString().padStart(2, '0')}h")
+            val showYear  = years > 0
+            val showMonth = showYear || months > 0
+            val showWeek  = showMonth || weeks > 0
+            val showDay   = showWeek || days > 0
+            if (showDay) strBuilder.add("${days.toString().padStart(2, '0')}d")
+            if (showWeek) strBuilder.add("${weeks.toString().padStart(2, '0')}w")
+            if (showMonth) strBuilder.add("${months.toString().padStart(2, '0')}m")
+            if (showYear) strBuilder.add("${years}y")
             return strBuilder.reversed().joinToString(" ")
         }
     }

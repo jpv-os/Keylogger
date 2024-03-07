@@ -21,6 +21,9 @@ import kotlin.io.path.Path
     storages = [Storage("KeyloggerSettings.xml")]
 )
 internal class SettingsService : PersistentStateComponent<SettingsService.State> {
+
+    // TODO: rename "database url" and "database url relative" to "database path" and "database path relative", but doing so breaks the current users settings
+
     /**
      * Internal representation of the currently active settings.
      */
@@ -74,36 +77,16 @@ internal class SettingsService : PersistentStateComponent<SettingsService.State>
      * Companion object to store the default values of the settings.
      */
     companion object {
-        // TODO: alles rund um URL refactoren und ordentlich benennen. path statt url!
-        /**
-         * @see [SettingsService.databaseURL].
-         */
         val DEFAULT_DATABASE_URL = Path(".keylogger-plugin", "db.sqlite").toString()
 
-        /**
-         * @see [SettingsService.databaseURLRelative].
-         */
         const val DEFAULT_DATABASE_URL_RELATIVE = true
 
-        /**
-         * @see [SettingsService.idleTimeout].
-         */
         const val DEFAULT_IDLE_TIMEOUT = 1000 // 1 second
 
-        /**
-         * @see [SettingsService.historySize].
-         */
         const val DEFAULT_HISTORY_SIZE = 25
 
-        /**
-         * @see [SettingsService.ideaVim].
-         */
-        const val DEFAULT_IDEA_VIM = false // TODO: is it possible to detect the presence of another plugin?
+        const val DEFAULT_IDEA_VIM = false
 
-        /**
-         * The name of the action produced by the IdeaVIM plugin.
-         * @see [SettingsService.State.ideaVim]
-         */
         const val IDEA_VIM_ACTION_NAME = "Shortcuts"
     }
 
