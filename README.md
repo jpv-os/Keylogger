@@ -38,9 +38,9 @@
 
 ## Getting Started
 
-- **Customize Keylogger** in the IDE Settings under `Settings > Tools > Keylogger`
-- **Look at your statistics** in the Keylogger Tool Window under `View > Tool Windows > Keylogger`
-- **Access the raw data** on your machine using `sqlite3`
+- **Customize Keylogger** in the IDE Settings under <kbd>Settings/Preferences</kbd> > <kbd>Tools</kbd> > <kbd>Keylogger</kbd>
+- **Look at your statistics** in the Keylogger Tool Window under <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Keylogger</kbd>
+- **Access the raw data** on your machine using <kbd>sqlite3</kbd>
 - Visit the [plugin page on GitHub](https://github.com/jpv-os/Keylogger) for more information, to report bugs and to suggest features
 - Consider leaving a review on the [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/23746-keylogger) if you enjoy Keylogger
 
