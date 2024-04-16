@@ -24,7 +24,7 @@ repositories {
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
     implementation(libs.annotations)
-    implementation("org.xerial:sqlite-jdbc:3.45.1.0") {
+    implementation("org.xerial:sqlite-jdbc:3.45.3.0") {
         exclude("org.slf4j", "slf4j-api") // causes error if not excluded
     }
     implementation("org.knowm.xchart:xchart:3.8.7")
