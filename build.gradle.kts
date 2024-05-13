@@ -27,7 +27,7 @@ dependencies {
     implementation("org.xerial:sqlite-jdbc:3.45.3.0") {
         exclude("org.slf4j", "slf4j-api") // causes error if not excluded
     }
-    implementation("org.knowm.xchart:xchart:3.8.7")
+    implementation("org.knowm.xchart:xchart:3.8.8")
 }
 
 // Set the JVM language level used to build the project. Use Java 11 for 2020.3+, and Java 17 for 2022.2+.
