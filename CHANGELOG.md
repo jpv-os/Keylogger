@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+# [0.7.0] - 2024-06-17
+
+### Changed
+
+- Configurable intervals for inserting data into the action database and updating the toolwindow content
+- Visit the plugin settings to find more information about the new settings
+
 ## [0.6.0] - 2024-06-17
 
 - Changelog update - `v0.5.4` by @github-actions in https://github.com/jpv-os/Keylogger/pull/39
@@ -111,7 +118,8 @@
 - Make database URL and idle timeout configurable via plugin settings
 - Add a simple settings page to configure database URL and idle timeout
 
-[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/jpv-os/Keylogger/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/jpv-os/Keylogger/compare/v0.5.4...v0.6.0
 [0.5.4]: https://github.com/jpv-os/Keylogger/compare/v0.5.1...v0.5.4
 [0.5.1]: https://github.com/jpv-os/Keylogger/compare/v0.5.0...v0.5.1
