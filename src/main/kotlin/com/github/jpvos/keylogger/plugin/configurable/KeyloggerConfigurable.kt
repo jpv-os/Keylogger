@@ -1,6 +1,7 @@
 package com.github.jpvos.keylogger.plugin.configurable
 
 import com.github.jpvos.keylogger.plugin.KeyloggerBundle
+import com.github.jpvos.keylogger.plugin.services.CounterService
 import com.github.jpvos.keylogger.plugin.services.SettingsService
 import com.github.jpvos.keylogger.plugin.util.forms.Form
 import com.intellij.openapi.Disposable
@@ -30,6 +31,7 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
      */
     private val form = Form.create<SettingsFormField> {
         val settingsService = service<SettingsService>()
+        val counterService = service<CounterService>()
         section(KeyloggerBundle.message("settings.form.header.actionDatabase")) {
             pathField(
                 SettingsFormField.DATABASE_URL,
@@ -96,7 +98,7 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
                 reset()
             }
             button(KeyloggerBundle.message("settings.form.ideaVim.button"), JBColor.RED) {
-                settingsService.cleanIdeaVimActions()
+                counterService.restoreCounter()
             }
             button(KeyloggerBundle.message("settings.clearDatabase"), JBColor.RED) {
                 settingsService.clearDatabase()
