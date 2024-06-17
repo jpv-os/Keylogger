@@ -6,7 +6,7 @@
 
 ## [0.7.1] - 2024-06-17
 
-### Changed 
+### Changed
 
 - Improved the settings labels for the new insert and update intervals
 
