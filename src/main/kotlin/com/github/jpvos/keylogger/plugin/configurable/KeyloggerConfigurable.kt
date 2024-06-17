@@ -22,8 +22,10 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
         DATABASE_URL,
         DATABASE_URL_RELATIVE,
         IDLE_TIMEOUT,
+        INSERT_INTERVAL,
+        UPDATE_INTERVAL,
         HISTORY_SIZE,
-        IDEA_VIM
+        IDEA_VIM,
     }
 
     /**
@@ -31,7 +33,6 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
      */
     private val form = Form.create<SettingsFormField> {
         val settingsService = service<SettingsService>()
-        val counterService = service<CounterService>()
         section(KeyloggerBundle.message("settings.form.header.actionDatabase")) {
             pathField(
                 SettingsFormField.DATABASE_URL,
@@ -63,8 +64,30 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
                 note(KeyloggerBundle.message("settings.form.idleTimeout.note"))
                 hint(KeyloggerBundle.message("settings.form.idleTimeout.hint"))
             }
+            gap()
+            numberField(
+                SettingsFormField.INSERT_INTERVAL,
+                KeyloggerBundle.message("settings.form.insertInterval.label")
+            ) {
+                settingsService.state.insertInterval
+            }
+            labelGroup {
+                default(KeyloggerBundle.message("settings.form.insertInterval.default"))
+                note(KeyloggerBundle.message("settings.form.insertInterval.note"))
+                hint(KeyloggerBundle.message("settings.form.insertInterval.hint"))
+            }
         }
         section(KeyloggerBundle.message("settings.form.header.toolWindow")) {
+            numberField(
+                SettingsFormField.UPDATE_INTERVAL,
+                KeyloggerBundle.message("settings.form.updateInterval.label")
+            ) {
+                settingsService.state.updateInterval
+            }
+            labelGroup {
+                default(KeyloggerBundle.message("settings.form.updateInterval.default"))
+                note(KeyloggerBundle.message("settings.form.updateInterval.note"))
+            }
             numberField(
                 SettingsFormField.HISTORY_SIZE,
                 KeyloggerBundle.message("settings.form.historySize.label")
@@ -98,7 +121,7 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
                 reset()
             }
             button(KeyloggerBundle.message("settings.form.ideaVim.button"), JBColor.RED) {
-                counterService.restoreCounter()
+                settingsService.cleanIdeaVimActions()
             }
             button(KeyloggerBundle.message("settings.clearDatabase"), JBColor.RED) {
                 settingsService.clearDatabase()
@@ -122,6 +145,8 @@ internal class KeyloggerConfigurable : SearchableConfigurable, SettingsService.L
             idleTimeout = form.model.get<Int>(SettingsFormField.IDLE_TIMEOUT).value,
             historySize = form.model.get<Int>(SettingsFormField.HISTORY_SIZE).value,
             ideaVim = form.model.get<Boolean>(SettingsFormField.IDEA_VIM).value,
+            insertInterval = form.model.get<Int>(SettingsFormField.INSERT_INTERVAL).value,
+            updateInterval = form.model.get<Int>(SettingsFormField.UPDATE_INTERVAL).value,
         )
         service<SettingsService>().update(formState)
     }

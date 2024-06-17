@@ -206,6 +206,18 @@ class Database(path: Path) {
             }
     }
 
+    fun batchPersist(actions: Iterable<Action>) {
+        connection.prepareStatement("INSERT INTO actions (type, name, timestamp) VALUES (?, ?, ?)").apply {
+            for (action in actions) {
+                setString(1, action.type.toString())
+                setString(2, action.name)
+                setLong(3, System.currentTimeMillis())
+                addBatch()
+            }
+            executeBatch()
+        }
+    }
+
     fun persist(action: Action) {
         connection.prepareStatement("INSERT INTO actions (type, name, timestamp) VALUES (?, ?, ?)").apply {
             setString(1, action.type.toString())

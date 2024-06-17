@@ -51,6 +51,14 @@ internal class SettingsService : PersistentStateComponent<SettingsService.State>
          */
         val idleTimeout: Int = DEFAULT_IDLE_TIMEOUT,
         /**
+         * The interval in milliseconds to insert actions into the database.
+         */
+        val insertInterval: Int = DEFAULT_INSERT_INTERVAL,
+        /**
+         * The interval in milliseconds to update the tool window.
+         */
+        val updateInterval: Int = DEFAULT_UPDATE_INTERVAL,
+        /**
          * The maximum number of actions to display in the history tool window.
          * Note: this is not the maximum number of actions to store in the database.
          */
@@ -82,6 +90,10 @@ internal class SettingsService : PersistentStateComponent<SettingsService.State>
         const val DEFAULT_DATABASE_URL_RELATIVE = true
 
         const val DEFAULT_IDLE_TIMEOUT = 1000 // 1 second
+
+        const val DEFAULT_INSERT_INTERVAL = 1000 // 1 second
+
+        const val DEFAULT_UPDATE_INTERVAL = 1000 // 1 second
 
         const val DEFAULT_HISTORY_SIZE = 25
 
@@ -163,6 +175,7 @@ internal class SettingsService : PersistentStateComponent<SettingsService.State>
      */
     fun cleanIdeaVimActions() {
         service<DatabaseService>().connection.deleteActionsByName(IDEA_VIM_ACTION_NAME)
+        service<CounterService>().restoreCounter()
         notifyChangeListeners()
     }
 

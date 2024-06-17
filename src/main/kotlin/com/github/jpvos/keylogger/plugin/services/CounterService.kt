@@ -5,6 +5,9 @@ import com.github.jpvos.keylogger.plugin.model.Counter
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
+import kotlinx.coroutines.*
+import java.time.Duration
+import java.time.Instant
 
 
 /**
@@ -19,9 +22,27 @@ internal class CounterService : Counter.Listener, Disposable {
      * The action counter.
      */
     val counter = Counter(idleTimeout = service<SettingsService>().state.idleTimeout.toLong())
+    private val actionBatch = mutableListOf<Action>()
+    private var lastBatchInsertTime = Instant.now()
+    private var insertInterval = service<SettingsService>().state.insertInterval.toLong()
+    private val batchInsertJob: Job
+
 
     init {
         restoreCounter()
+        batchInsertJob = CoroutineScope(Dispatchers.Default).launch {
+            while (isActive) {
+                delay(service<SettingsService>().state.insertInterval.toLong())
+                val currentTime = Instant.now()
+                val updateDue = Duration.between(lastBatchInsertTime, currentTime)
+                    .toMillis() > insertInterval
+                if (updateDue && actionBatch.isNotEmpty()) {
+                    service<DatabaseService>().connection.batchPersist(actionBatch)
+                    actionBatch.clear()
+                    lastBatchInsertTime = currentTime
+                }
+            }
+        }
     }
 
     /**
@@ -29,6 +50,14 @@ internal class CounterService : Counter.Listener, Disposable {
      */
     override fun dispose() {
         counter.unregisterListener(this)
+        stopBatchInsertJob()
+    }
+
+    private fun stopBatchInsertJob() {
+        batchInsertJob.cancel()
+        if (actionBatch.isNotEmpty()) {
+            service<DatabaseService>().connection.batchPersist(actionBatch)
+        }
     }
 
     /**
