@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## [0.6.0] - 2024-06-17
+
+- Changelog update - `v0.5.4` by @github-actions in https://github.com/jpv-os/Keylogger/pull/39
+- Bump JetBrains/qodana-action from 2024.1.4 to 2024.1.5 by @dependabot in https://github.com/jpv-os/Keylogger/pull/40
+- Bump org.xerial:sqlite-jdbc from 3.45.3.0 to 3.46.0.0 by @dependabot in https://github.com/jpv-os/Keylogger/pull/43
+- Bump org.jetbrains.kotlin.jvm from 1.9.24 to 2.0.0 by @dependabot in https://github.com/jpv-os/Keylogger/pull/42
+- Bump org.jetbrains.kotlinx.kover from 0.7.6 to 0.8.1 by @dependabot in https://github.com/jpv-os/Keylogger/pull/44
+- Bump gradle/wrapper-validation-action from 3.3.2 to 3.4.0 by @dependabot in https://github.com/jpv-os/Keylogger/pull/45
+- Bump org.jetbrains.intellij from 1.17.3 to 1.17.4 by @dependabot in https://github.com/jpv-os/Keylogger/pull/47
+
 ## [0.5.4] - 2024-05-13
 
 - Bump gradle/wrapper-validation-action from 3.3.1 to 3.3.2 by @dependabot in https://github.com/jpv-os/Keylogger/pull/33
@@ -101,7 +111,8 @@
 - Make database URL and idle timeout configurable via plugin settings
 - Add a simple settings page to configure database URL and idle timeout
 
-[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.5.4...HEAD
+[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/jpv-os/Keylogger/compare/v0.5.4...v0.6.0
 [0.5.4]: https://github.com/jpv-os/Keylogger/compare/v0.5.1...v0.5.4
 [0.5.1]: https://github.com/jpv-os/Keylogger/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/jpv-os/Keylogger/compare/v0.4.0...v0.5.0
