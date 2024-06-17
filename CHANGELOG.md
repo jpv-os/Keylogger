@@ -4,7 +4,13 @@
 
 ## [Unreleased]
 
-# [0.7.0] - 2024-06-17
+## [0.7.1] - 2024-06-17
+
+### Changed 
+
+- Improved the settings labels for the new insert and update intervals
+
+## [0.7.0] - 2024-06-17
 
 ### Changed
 
@@ -118,7 +124,8 @@
 - Make database URL and idle timeout configurable via plugin settings
 - Add a simple settings page to configure database URL and idle timeout
 
-[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/jpv-os/Keylogger/compare/v0.7.1...HEAD
+[0.7.1]: https://github.com/jpv-os/Keylogger/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/jpv-os/Keylogger/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/jpv-os/Keylogger/compare/v0.5.4...v0.6.0
 [0.5.4]: https://github.com/jpv-os/Keylogger/compare/v0.5.1...v0.5.4
